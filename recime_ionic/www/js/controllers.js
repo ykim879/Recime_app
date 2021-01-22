@@ -2,7 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('PantryCtrl', function($scope, Chats) {
+  const searchbar = document.querySelector('ion-searchbar');
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
     Chats.remove(chat);

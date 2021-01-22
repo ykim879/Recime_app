@@ -1,0 +1,28 @@
+<style>
+h3 {
+    margin-left: 38px;
+    font-size: 24px;
+}
+.add-pantry {
+  margin-left: 150px;
+  width: 90px;
+  height: 21px;
+}
+</style>
+<ion-view view-title="Pantry">
+  <ion-content color = "danger" class = "padding">
+    <h3>Virtual Pantry</h3>
+    <img src = "img/add_new.png" class = "add-pantry">
+    <ion-searchbar showCancelButton="focus"></ion-searchbar>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/pantry/{{chat.id}}">
+        <img ng-src="{{chat.face}}">
+        <h2>{{chat.name}}</h2>
+        <p>added: {{chat.added}}</p>
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
