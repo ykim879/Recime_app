@@ -1,4 +1,12 @@
 angular.module('starter.services', [])
+.factory('search', function(){
+  var search = "Search Ingredients";
+  return {
+    text: function() {
+      return search;
+    }
+  }
+})
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
@@ -17,7 +25,7 @@ angular.module('starter.services', [])
   }, {
     id: 2,
     name: 'tomatoes',
-    added: 'Did you get the ice cream?',
+    added: '09/21/20',
     face: 'img/tomato.png'
   }];
 
