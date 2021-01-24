@@ -13,7 +13,7 @@ angular.module('starter.controllers', [])
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
-
+.controller('PantryAddCtrl', function($scope) {})
 .controller('AboutCtrl', function($scope) {
 })
 

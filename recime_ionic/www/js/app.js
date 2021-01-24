@@ -25,6 +25,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
+  //https://scotch.io/tutorials/3-simple-tips-for-using-ui-router
+  
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
@@ -66,7 +68,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
+    .state('tab.pantry-add', {
+      url: '/pantry/add',
+      views: {
+        'tab-pantry': {
+          templateUrl: 'templates/pantry-add.html',
+          controller: 'PantryAddCtrl'
+        }
+      }
+    })
       .state('tab.about', {
           url: '/about',
           views: {
