@@ -52,6 +52,10 @@ const routes: Routes = [
               {
                 path: '',
                 loadChildren: () => import('../pantry/pantry.module').then( m => m.PantryPageModule)
+              },
+              {
+                path: 'add-ingredients',
+                loadChildren: () => import('../add-ingredients/add-ingredients.module').then( m => m.AddIngredientsPageModule)
               }
             ]
         },
