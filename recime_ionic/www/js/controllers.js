@@ -1,6 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('ProfileCtrl', function($scope) {
+  console.log($scope);
+})
 
 .controller('PantryCtrl', function($scope, Chats) {
   const searchbar = document.querySelector('ion-searchbar');
