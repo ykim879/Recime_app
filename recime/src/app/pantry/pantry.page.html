@@ -1,10 +1,12 @@
 <style>
   h3 {
-      margin-left: 38px;
+      margin-left: 50px;
+      margin-top: 32px;
       font-size: 24px;
+      
   }
   .add-pantry {
-    margin-left: 160px;
+    margin-left: 10px;
     width: 100px;
     height: 28px;
     border: none;
@@ -27,18 +29,21 @@
   }
   .text-block{
     position: relative;
-    top: -28px;
-    left:35px;
+    top: -40px;
+    left: 40px;
   }
   </style>
   <ion-content class = "padding">
     <h3>Virtual Pantry</h3>
-    <a routerLink="/tabs/pantry/add-ingredients"><button class = "add-pantry"><img src = "../../assets/icon/add_new.png"></button></a>
+    <a routerLink="/tabs/pantry/add-ingredients"><button class = "add-pantry"><img  width = "90" height = "21" src = "../../assets/icon/add_new.png"></button></a>
     <div class="searchbar">
-      <img src = "../../assets/icon/search.png" class = "searchbarimg">
+      <ion-searchbar
+        >
+      </ion-searchbar>
+      <!-- <img src = "../../assets/icon/search.png" class = "searchbarimg">
       <div class = "text-block">
         <p style = "color: #C4C4C4;">Search Ingredients</p>
-      </div>
+      </div> -->
     </div>
     <h>Ingredients</h>
     <!-- <h>Ingredients ({{chats.length}})</h> -->
