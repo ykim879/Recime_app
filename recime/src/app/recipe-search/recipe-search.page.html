@@ -1,9 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Feed</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content class="body">
+  <h3 class="recipe-title">Recipe Finder</h3>
+  <div class="recipe-search">
+    <h4 class="recipe-header">Recipes({{0}})</h4>
+    <ion-button fill="clear"
+                size="default"
+                color="danger"
+                class="sort-button"
+                routerLink="/tabs/recipe-search/filters">
+      <ion-icon slot="icon-only"
+                name="options-outline">
+      </ion-icon>
+    </ion-button>
+  </div>
 </ion-content>
