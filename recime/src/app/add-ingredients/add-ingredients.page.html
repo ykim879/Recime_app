@@ -1,9 +1,59 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>add-ingredients</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<style>
+  h3 {
+      margin-left: 50px;
+      margin-top: 32px;
+      font-size: 24px;
+      
+  }
+  .add-pantry {
+    margin-left: 10px;
+    width: 100px;
+    height: 28px;
+    border: none;
+    background: none;
+  }
+  .padding{
+      background: #FAF7F2;
+  }
+  .item-remove-animate{
+  border-radius: 20px !important;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  height: 71px;
+  }
+  .searchbarimg{
+    top:  144px;
+    width: 250px;
+  }
+  .text-block{
+    position: relative;
+    top: -40px;
+    left: 40px;
+  }
+  </style>
+  <ion-content class = "padding">
+    <h3>Add Ingredients</h3>
+    <div class="searchbar">
+      <ion-searchbar
+        >
+      </ion-searchbar>
+      <!-- <img src = "../../assets/icon/search.png" class = "searchbarimg">
+      <div class = "text-block">
+        <p style = "color: #C4C4C4;">Search Ingredients</p>
+      </div> -->
+    </div>
+    <h>Ingredients</h>
+    <!-- <h>Ingredients ({{chats.length}})</h> -->
+    <!-- <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/pantry/{{chat.id}}">
+        <img ng-src="{{chat.face}}">
+        <h2><b>{{chat.name}}</b></h2>
+        <p>added: {{chat.added}}</p>
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list> -->
+  </ion-content>
