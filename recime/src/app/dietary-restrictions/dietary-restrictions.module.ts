@@ -17,4 +17,5 @@ import { DietaryRestrictionsPage } from './dietary-restrictions.page';
   ],
   declarations: [DietaryRestrictionsPage]
 })
-export class DietaryRestrictionsPageModule {}
+export class DietaryRestrictionsPageModule {
+}
