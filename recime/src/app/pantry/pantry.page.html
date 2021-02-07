@@ -56,14 +56,14 @@
     </div>
     <h class="ion-padding-start ion-padding-end">Ingredients</h>
     <!-- <h>Ingredients ({{chats.length}})</h> -->
-    <!-- <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/pantry/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2><b>{{chat.name}}</b></h2>
-        <p>added: {{chat.added}}</p>
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
+    <!--<ion-list #userIngredientsList>
+      <ion-item-sliding *ngFor="let ingredient of group.ingredients">
+      <ion-item>
+        <ion-label>
+          <h3>{{{ingredient}}}</h3>
+        </ion-label>
       </ion-item>
-    </ion-list> -->
+      </ion-item-sliding>
+    </ion-list> 
+  -->
   </ion-content>
