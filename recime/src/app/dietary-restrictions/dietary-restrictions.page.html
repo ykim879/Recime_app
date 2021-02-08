@@ -51,21 +51,13 @@
 (ionScroll)="logScrolling($event)"
 (ionScrollEnd)="logScrollEnd()">
   <p>Select all dietary restrictions that apply.</p>
+<!-- changed it into enum or property-->
+<!-- do selection link: https://www.freakyjolly.com/ionic-4-add-radio-lists-in-radio-group-example-and-tutorial/#.YCGLR-hKhPY-->
   <ion-list>
-    <ion-radio-group value="biff">
-      <ion-item>
-        <ion-label>Biff</ion-label>
-        <ion-radio slot="start" value="biff"></ion-radio>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Griff</ion-label>
-        <ion-radio slot="start" value="griff"></ion-radio>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Buford</ion-label>
-        <ion-radio slot="start" value="buford"></ion-radio>
+    <ion-radio-group value="dietary-restrictions">
+      <ion-item *ngFor = "let dietary of radioselect | keyvalue">
+        <ion-label>{{dietary['value']}}</ion-label>
+        <ion-radio slot="start" value="{{dietary['key']}}"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
