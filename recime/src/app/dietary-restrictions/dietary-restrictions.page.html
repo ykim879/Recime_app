@@ -53,11 +53,12 @@
   <p>Select all dietary restrictions that apply.</p>
 <!-- changed it into enum or property-->
 <!-- do selection link: https://www.freakyjolly.com/ionic-4-add-radio-lists-in-radio-group-example-and-tutorial/#.YCGLR-hKhPY-->
-  <ion-list  *ngFor = "let dietary of radioselect | keyvalue">
-    <ion-radio-group value="{{dietary['value']}}">
+  <ion-list  *ngFor = "let dietary of radioselect" (ionFocus)="radioFocus()" (ionSelect)="radioSelect($event)"
+  (ionBlur)="radioBlur()">
+    <ion-radio-group allow-empty-selection="true" value="{{dietary.id}}" (ionChange)="radioGroupChange($event)">
       <ion-item>
-        <ion-label>{{dietary['value']}}</ion-label>
-        <ion-radio slot="start" value="{{dietary['key']}}"></ion-radio>
+        <ion-label>{{dietary.text}}</ion-label>
+        <ion-radio slot="start" value="{{dietary.id}}" checked = "{{dietary.checked}}"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
