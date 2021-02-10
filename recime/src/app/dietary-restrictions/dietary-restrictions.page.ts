@@ -101,7 +101,7 @@ export class DietaryRestrictionsPage implements OnInit {
   
   radioGroupChange(event) {
     console.log("radioGroupChange",event.detail);
-    this.radioselect  = event.detail; //what is event.detail?
+    this.radioselect  = event.detail; //change here after the updating User
   }
 
   radioFocus() {
