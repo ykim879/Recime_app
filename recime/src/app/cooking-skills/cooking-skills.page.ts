@@ -20,7 +20,7 @@ selectedRadioItem:any;
 radioselect = CookingSkill;
 constructor() { }
 ionViewDidEnter() {
-  this.defaultHref = '../dietary-restrictions/dietary-restrictions.module';
+  this.defaultHref = '../cooking-skills/cooking-skills.module';
 }
 
 radioGroupChange(event) {
