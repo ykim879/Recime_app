@@ -1,87 +1,105 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonRadioGroup } from '@ionic/angular';
+import { UserData } from '../user-data';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-kitchen-tools',
   templateUrl: './kitchen-tools.page.html',
   styleUrls: ['./kitchen-tools.page.scss'],
 })
 export class KitchenToolsPage implements OnInit {
-  @ViewChild('radioGroup') radioGroup: IonRadioGroup //for defualt choice
+
   defaultHref = '';
-  selectedRadioItem: any;
-  radioselect = [ //later put it in User and do initialization in IonViewDefault or constructor
+  selectedTools: string[] = [];
+
+  toolList = [
     {
-      id: '0',
-      name: 'Microwave',
-      value: 'Microwave',
-      text: 'Microwave',
+      name: 'toolList',
+      value: 'airFryer',
+      text: 'Air Fryer',
       disabled: false,
-      checked: false,
+      isChecked: false
     },
     {
-      id: '1',
-      name: 'Oven',
-      value: 'Oven',
+      name: 'toolList',
+      value: 'microwave',
+      text: 'Microwave',
+      disabled: false,
+      isChecked: false
+    },
+    {
+      name: 'toolList',
+      value: 'oven',
       text: 'Oven',
       disabled: false,
-      checked: false,
-    },{
-      id: '2',
-      name: 'Stove',
-      value: 'Stove',
+      isChecked: false
+    },
+    {
+      name: 'toolList',
+      value: 'slowCooker',
+      text: 'Slow cooker',
+      disabled: false,
+      isChecked: false
+    },
+    {
+      name: 'toolList',
+      value: 'stove',
       text: 'Stove',
       disabled: false,
-      checked: false,
-    },{
-      id: '3',
-      name: 'AirFryer',
-      value: 'AirFryer',
-      text: 'Air fryer',
-      disabled: false,
-      checked: false,
-    },{
-      id: '4',
-      name: 'DeepFryer',
-      value: 'DeepFryer',
-      text: 'Deep fryer',
-      disabled: false,
-      checked: false,
-    },{
-      id: '5',
-      name: 'Toaster',
+      isChecked: false
+    },
+    {
+      name: 'toolList',
       value: 'Toaster',
       text: 'Toaster',
       disabled: false,
-      checked: false,
-    },{
-      id: '6',
-      name: 'SlowCooker',
-      value: 'SlowCooker',
-      text: 'Slow cooker',
-      disabled: false,
-      checked: false,
-    }];
-  constructor() { }
+      isChecked: false
+    }
+  ];
+
+  constructor(
+    private user: UserData, public storage: Storage
+  ) { }
+
   ionViewDidEnter() {
-    this.defaultHref = '../kitchen-tools/kitchen-tools.module';
-  }
-  
-  radioGroupChange(event) {
-    console.log("radioGroupChange",event.detail);
-    this.radioselect  = event.detail; //change here after the updating User
+    this.defaultHref = '../dietary-restrictions';
   }
 
-  radioFocus() {
-    console.log("radioFocus");
-  }
-  radioSelect(event) {
-    console.log("radioSelect",event.detail);
-    this.selectedRadioItem = event.detail;
-  }
-  radioBlur() {
-    console.log("radioBlur");
-  }
   ngOnInit() {
+    //user's kitchen tools are checked upon arrival to page
+    this.storage.get("tools").then((val) => {
+      for (let i = 0; i < this.toolList.length; i++) {
+        for (let item of val) {
+          if (item === this.toolList[i].value) {
+            this.toolList[i].isChecked = true;
+          }
+        }
+      }
+    });
   }
+
+  itemChange(event) {
+    if (!event.detail.checked) {
+      this.user.removeKitchenTool(event.detail.value);
+      const index = this.selectedTools.indexOf(event.detail.value);
+        if (index > -1) {
+            this.selectedTools.splice(index, 1);
+        }
+    } else {
+      this.user.addKitchenTool(event.detail.value);
+      this.selectedTools.push(event.detail.value);
+    }
+  }
+
+  saveTools() {
+    this.storage.set("tools", this.user.kitchenTools);
+  }
+
+  // test user storage of kitchen tools
+  // loadData() {
+  //   this.storage.get("tools").then((val) => {
+  //     console.log("Kitchen tools: ", val);
+  //   });
+  // }
 
 }

@@ -25,6 +25,7 @@ ion-content {
     --padding-start: 20px;
     --padding-top: 20px;
   }
-ion-radio{
-    --color-checked: #F8CB71;
-  }
+ion-checkbox {
+    --background-checked: #F8CB71;
+    --border-color-checked: #F8CB71;
+}

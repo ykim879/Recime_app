@@ -37,7 +37,7 @@
 <ion-header>
   <ion-toolbar class = "new-background-color">
     <ion-buttons slot="start">
-    <ion-back-button  [defaultHref]="defaultHref"></ion-back-button>
+    <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
     <ion-title>Cooking Skill Level</ion-title>
   </ion-toolbar>
@@ -46,23 +46,21 @@
   </div>
 </ion-header>
 
-<ion-content fullscreen [scrollEvents]="true"
-(ionScrollStart)="logScrollStart()"
-(ionScroll)="logScrolling($event)"
-(ionScrollEnd)="logScrollEnd()">
+<ion-content fullscreen>
   <p>Select your cooking skill level.</p>
-<!-- changed it into enum or property-->
-<!-- do selection link: https://www.freakyjolly.com/ionic-4-add-radio-lists-in-radio-group-example-and-tutorial/#.YCGLR-hKhPY-->
   <ion-list>
-    <ion-radio-group value="cooking-skill">
-      <ion-item *ngFor = "let skill of radioselect | keyvalue" >
-        <ion-label>{{skill.value}}</ion-label>
-        <ion-radio slot="start" value="{{skill.key}}"></ion-radio>
+    <!-- https://www.freakyjolly.com/ionic-4-add-radio-lists-in-radio-group-example-and-tutorial/ -->
+    <ion-radio-group [(ngModel)]="chosen_skill" allow-empty-selection="true" (ionChange)="radioGroupChange($event)">
+      <ion-item *ngFor="let item of skillList" (ionSelect)="radioSelect($event)">
+        <ion-label>{{item.text}}</ion-label>
+        <ion-radio slot="start" name="{{item.name}}" value="{{item.value}}"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
 </ion-content>
 <ion-footer>
-  <ion-button class = "center">Save Changes</ion-button>
+  <ion-button class = "center" (click)="saveSkills()">Save Changes</ion-button>
+  <!-- test user storage -->
+  <!-- <ion-button class = "center" (click)="loadData()">Load Data</ion-button> -->
 </ion-footer>
 

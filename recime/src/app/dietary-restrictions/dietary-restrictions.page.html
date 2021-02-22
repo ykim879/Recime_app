@@ -33,6 +33,7 @@
   -ms-flex-align: center;
   align-items: center;
 }
+
 </style>
 <ion-header>
   <ion-toolbar class = "new-background-color">
@@ -46,24 +47,18 @@
   </div>
 </ion-header>
 
-<ion-content fullscreen [scrollEvents]="true"
-(ionScrollStart)="logScrollStart()"
-(ionScroll)="logScrolling($event)"
-(ionScrollEnd)="logScrollEnd()">
+<ion-content fullscreen>
   <p>Select all dietary restrictions that apply.</p>
-<!-- changed it into enum or property-->
-<!-- do selection link: https://www.freakyjolly.com/ionic-4-add-radio-lists-in-radio-group-example-and-tutorial/#.YCGLR-hKhPY-->
-  <ion-list  *ngFor = "let dietary of radioselect" (ionFocus)="radioFocus()" (ionSelect)="radioSelect($event)"
-  (ionBlur)="radioBlur()">
-    <ion-radio-group allow-empty-selection="true" value="{{dietary.id}}" (ionChange)="radioGroupChange($event)">
+  <ion-list *ngFor="let item of dietList">
       <ion-item>
-        <ion-label>{{dietary.text}}</ion-label>
-        <ion-radio slot="start" value="{{dietary.id}}" checked = "{{dietary.checked}}"></ion-radio>
+        <ion-label>{{item.text}}</ion-label>
+        <ion-checkbox slot="start" [(ngModel)]="item.isChecked" [value]="item.value" (ionChange)="itemChange($event)"></ion-checkbox>
       </ion-item>
-    </ion-radio-group>
   </ion-list>
 
 </ion-content>
 <ion-footer>
-  <ion-button class = "center">Save Changes</ion-button>
+  <ion-button class = "center" (click)="saveDiets()">Save Changes</ion-button>
+  <!-- test user storage -->
+  <!-- <ion-button class = "center" (click)="loadData()">Load Data</ion-button> -->
 </ion-footer>

@@ -1,120 +1,154 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonRadioGroup } from '@ionic/angular';
-export enum DeitaryRestriction { //maybe have to be in somewhere else
-  TreeNuts = "Tree Nuts",
-  Peanuts = "Peanuts",
-  Milk = "Milk",
-  Glueten = "Glueten",
-  Vegan = "Vegan",
-  Vegetarian = "Vegetarian",
-  Halal = "Halal",
-  Chocolate = "Chocolate",
-  Lactose = "Lactose",
-  Diabetic = "Diabetic"
-}
+import { UserData } from '../user-data';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-dietary-restrictions',
   templateUrl: './dietary-restrictions.page.html',
   styleUrls: ['./dietary-restrictions.page.scss'],
 })
+
 export class DietaryRestrictionsPage implements OnInit {
-  @ViewChild('radioGroup') radioGroup: IonRadioGroup //for defualt choice
+
   defaultHref = '';
-  selectedRadioItem:any;
-  radioselect = [ //later put it in User and do initialization in IonViewDefault or constructor
+  selectedDiets: string[] = [];
+
+  //taken from Spoonacular API's 'Diets' and 'Intolerances' endpoints
+  dietList = [
     {
       id: '0',
-      name: 'TreeNuts',
-      value: 'TreeNuts',
-      text: 'Tree Nuts',
+      name: 'dietList',
+      value: 'eggIntolerance',
+      text: 'Egg Intolerance',
       disabled: false,
-      checked: false,
+      isChecked: false
     },
     {
       id: '1',
-      name: 'Peanuts',
-      value: 'Peanuts',
-      text: 'Peanuts',
+      name: 'dietList',
+      value: 'glutenFree',
+      text: 'Gluten Free',
       disabled: false,
-      checked: false,
-    },{
+      isChecked: false
+    },
+    {
       id: '2',
-      name: 'Milk',
-      value: 'Milk',
-      text: 'Milk',
+      name: 'dietList',
+      value: 'lactoseIntolerance',
+      text: 'Lactose Intolerance',
       disabled: false,
-      checked: false,
-    },{
+      isChecked: false
+    },
+    {
       id: '3',
-      name: 'Glueten',
-      value: 'Glueten',
-      text: 'Glueten',
+      name: 'dietList',
+      value: 'paleo',
+      text: 'Paleo',
       disabled: false,
-      checked: false,
-    },{
+      isChecked: false
+    },
+    {
       id: '4',
-      name: 'Vegan',
-      value: 'Vegan',
+      name: 'dietList',
+      value: 'peanutAllergy',
+      text: 'Peanut Allergy',
+      disabled: false,
+      isChecked: false
+    },
+    {
+      id: '5',
+      name: 'dietList',
+      value: 'pescetarian',
+      text: 'Pescetarian',
+      disabled: false,
+      isChecked: false
+    },
+    {
+      id: '6',
+      name: 'dietList',
+      value: 'seafoodAllergy',
+      text: 'Seafood Allergy',
+      disabled: false,
+      isChecked: false
+    },
+    {
+      id: '7',
+      name: 'dietList',
+      value: 'shellfishAllergy',
+      text: 'Shellfish Allergy',
+      disabled: false,
+      isChecked: false
+    },
+    {
+      id: '8',
+      name: 'dietList',
+      value: 'treeNutAllergy',
+      text: 'Tree Nut Allergy',
+      disabled: false,
+      isChecked: false
+    },
+    {
+      id: '9',
+      name: 'dietList',
+      value: 'vegan',
       text: 'Vegan',
       disabled: false,
-      checked: false,
-    },{
-      id: '5',
-      name: 'Vegetarian',
-      value: 'Vegetarian',
+      isChecked: false
+    },
+    {
+      id: '10',
+      name: 'dietList',
+      value: 'vegetarian',
       text: 'Vegetarian',
       disabled: false,
-      checked: false,
-    },{
-      id: '6',
-      name: 'Halal',
-      value: 'Halal',
-      text: 'Halal',
-      disabled: false,
-      checked: false,
-    },{
-      id: '7',
-      name: 'Chocolate',
-      value: 'Chocolate',
-      text: 'Chocolate',
-      disabled: false,
-      checked: false,
-    },{
-      id: '8',
-      name: 'Lactose',
-      value: 'Lactose',
-      text: 'Lactose',
-      disabled: false,
-      checked: false,
-    },{
-      id: '9',
-      name: 'Diabetic',
-      value: 'Diabetic',
-      text: 'Diabetic',
-      disabled: false,
-      checked: false,
-    }];
-  constructor() { }
+      isChecked: false
+    }
+   ];
+  
+  constructor(
+    private user: UserData, public storage: Storage
+  ) { }
+
   ionViewDidEnter() {
-    this.defaultHref = '../dietary-restrictions/dietary-restrictions.module';
+    this.defaultHref = '../dietary-restrictions';
   }
   
-  radioGroupChange(event) {
-    console.log("radioGroupChange",event.detail);
-    this.radioselect  = event.detail; //change here after the updating User
+  ngOnInit() {
+    //user's dietary restrictions are checked upon arrival to page
+    this.storage.get("diets").then((val) => {
+      for (let i = 0; i < this.dietList.length; i++) {
+        for (let item of val) {
+          if (item === this.dietList[i].value) {
+            this.dietList[i].isChecked = true;
+          }
+        }
+      }
+    });
   }
 
-  radioFocus() {
-    console.log("radioFocus");
+  itemChange(event) {
+    if (!event.detail.checked) {
+      this.user.removeDietaryRestriction(event.detail.value);
+      const index = this.selectedDiets.indexOf(event.detail.value);
+      if (index > -1) {
+          this.selectedDiets.splice(index, 1);
+      }
+    } else {
+      this.user.addDietaryRestriction(event.detail.value);
+      this.selectedDiets.push(event.detail.value);
+      
+    }
   }
-  radioSelect(event) {
-    console.log("radioSelect",event.detail);
-    this.selectedRadioItem = event.detail;
+
+  saveDiets() {
+    this.storage.set("diets", this.user.dietaryRestrictions);
   }
-  radioBlur() {
-    console.log("radioBlur");
-  }
-  ngOnInit() {
-  }
+
+  // test user storage of dietary restrictions
+  // loadData() {
+  //   this.storage.get("diets").then((val) => {
+  //     console.log("Dietary restrictions: ", val);
+  //   });
+  // }
 
 }

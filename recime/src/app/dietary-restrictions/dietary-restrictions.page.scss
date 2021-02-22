@@ -17,7 +17,6 @@ ion-button {
 }
 ion-button-back {
     color: #F8CB71 !important;
-    color-focused: #E16033 !important;
 }
 ion-content {
     --padding-bottom: 10px;
@@ -25,6 +24,7 @@ ion-content {
     --padding-start: 20px;
     --padding-top: 20px;
   }
-ion-radio{
-    --color-checked: #F8CB71;
-  }
+ion-checkbox {
+    --background-checked: #F8CB71;
+    --border-color-checked: #F8CB71;
+}
