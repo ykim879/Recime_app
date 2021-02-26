@@ -46,15 +46,34 @@
     <h3 class = "title">Virtual Pantry</h3>
     <a routerLink="/tabs/pantry/add-ingredients"><button class = "add-pantry"><img  width = "90" height = "21" src = "../../assets/icon/add_new.png"></button></a>
     <div class="searchbar">
-      <ion-searchbar
-        >
-      </ion-searchbar>
+      <ion-searchbar 
+        placeholder="Search Ingredients"
+        [(ngModel)] = "searchTerm" 
+      ></ion-searchbar>
       <!-- <img src = "../../assets/icon/search.png" class = "searchbarimg">
       <div class = "text-block">
         <p style = "color: #C4C4C4;">Search Ingredients</p>
       </div> -->
     </div>
-    <h class="ion-padding-start ion-padding-end">Ingredients</h>
+
+    <!-- <h class="ion-padding-start ion-padding-end">Ingredients</h> -->
+    
+    <ion-list-header>
+      <ion-label>Ingredients</ion-label>
+    </ion-list-header>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let ingredient of testIngredients | filter: searchTerm; let i = index" (ionSwipe)="delete(item)">
+        <ion-item (click)="itemDetails($event, item)">
+          {{ingredient.name}}
+          <!-- <ion-label>Item</ion-label> -->
+        </ion-item>
+        <ion-item-options>
+          <button ion-button expandable (click)="remove(i)">Remove</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+   
     <!-- <h>Ingredients ({{chats.length}})</h> -->
     <!--<ion-list #userIngredientsList>
       <ion-item-sliding *ngFor="let ingredient of group.ingredients">
@@ -67,3 +86,5 @@
     </ion-list> 
   -->
   </ion-content>
+
+  
