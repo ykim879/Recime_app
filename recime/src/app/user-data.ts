@@ -8,11 +8,12 @@ export class UserData {
     cookingSkills: string = '';
     dietaryRestrictions: string[] = [];
     kitchenTools: string[] = [];
+    pantryIngredients: Set<string> = new Set();
 
     constructor(public storage: Storage) { }
 
     setSkillLevel(skill: string): void {
-        this.cookingSkills = skill;
+      this.cookingSkills = skill;
     }
 
     hasDietaryRestriction(diet: string): boolean {
@@ -39,5 +40,10 @@ export class UserData {
         if (index > -1) {
             this.kitchenTools.splice(index, 1);
         }
+    }
+
+    addPantryIngredient(ingredient: string): void {
+      this.pantryIngredients.add(ingredient);
+      this.storage.set('ingredients', this.pantryIngredients);
     }
 }
