@@ -86,8 +86,12 @@ export class KitchenToolsPage implements OnInit {
             this.selectedTools.splice(index, 1);
         }
     } else {
-      this.user.addKitchenTool(event.detail.value);
-      this.selectedTools.push(event.detail.value);
+      //no duplicates
+      const index = this.user.kitchenTools.indexOf(event.detail.value);
+        if (index <= -1) {
+          this.user.addKitchenTool(event.detail.value);
+          this.selectedTools.push(event.detail.value);
+        }
     }
   }
 

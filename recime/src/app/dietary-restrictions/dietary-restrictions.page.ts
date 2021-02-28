@@ -134,8 +134,12 @@ export class DietaryRestrictionsPage implements OnInit {
           this.selectedDiets.splice(index, 1);
       }
     } else {
-      this.user.addDietaryRestriction(event.detail.value);
-      this.selectedDiets.push(event.detail.value);
+      //no duplicates
+      const index = this.user.dietaryRestrictions.indexOf(event.detail.value);
+      if (index <= -1) {
+        this.user.addDietaryRestriction(event.detail.value);
+        this.selectedDiets.push(event.detail.value);
+      }
       
     }
   }
