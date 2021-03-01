@@ -6,9 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./liked-recipes.page.scss'],
 })
 export class LikedRecipesPage implements OnInit {
-
+  defaultHref = '';
   constructor() { }
-
+  ionViewDidEnter() {
+    this.defaultHref = '../liked-recipes';
+  }
   ngOnInit() {
   }
 
