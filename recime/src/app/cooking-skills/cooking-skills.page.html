@@ -37,7 +37,8 @@
 <ion-header>
   <ion-toolbar class = "new-background-color">
     <ion-buttons slot="start">
-    <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    <ion-alert-controller></ion-alert-controller>
+    <ion-back-button [defaultHref]="defaultHref" color = "dark" (click) = "showAlert()"></ion-back-button>
     </ion-buttons>
     <ion-title>Cooking Skill Level</ion-title>
   </ion-toolbar>
