@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './cooking-skills.page.html',
   styleUrls: ['./cooking-skills.page.scss'],
 })
-
+// priority of back button 
 export class CookingSkillsPage implements OnInit {
 
   defaultHref = '';

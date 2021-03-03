@@ -1,10 +1,5 @@
 <style>
-  .YesButton{
-    border-color: #F8CB71;
-}
-.NoButton{
-    background: #F8CB71;
-}
+
   .dietary-blob{
     display: flex;
     justify-content: center;
@@ -44,7 +39,7 @@
   <ion-toolbar class = "new-background-color">
     <ion-buttons slot="start">
     <ion-alert-controller></ion-alert-controller>
-    <ion-back-button [defaultHref]="defaultHref" color = "dark" (click) = "showAlert()"></ion-back-button>
+    <ion-back-button color = "dark" (click) = "showAlert()"></ion-back-button>
     </ion-buttons>
     <ion-title>Cooking Skill Level</ion-title>
   </ion-toolbar>

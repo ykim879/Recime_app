@@ -42,13 +42,21 @@
 
 <ion-content fullscreen>
   <ion-list>
-    <ion-item>
-      <p class = "title">TOTAL COOK TIME</p>
-      <ion-range id="dual-range" min="0" max="120" step="30" value="30" snaps ticks = "true" dual-knobs pin color="dark">
+    <div>
+      <p class = "title">TOTAL COOK TIME<br /> </p>
+      <ion-range id="dual-range" min="0" max="120" step="30" value="30" snaps ticks = "true" dual-knobs pin color="warning">
+      <ion-label>0 min</ion-label>
       </ion-range>
+      <ion-row> 
+        <ion-col>0 min</ion-col> 
+        <ion-col>30 min</ion-col>
+        <ion-col>1 hour</ion-col>
+        <ion-col>1.5 hour</ion-col>
+        <ion-col>2 hours</ion-col>
+      </ion-row>
       <!--Todo: integrate to save the information, show the time on the bottom, slides under the total cook time-->
       <!--change the pin color https://ionicframework.com/docs/theming/colors-->
-    </ion-item>
+    </div>
     <!--use ion-chip for the item buttons-->
   </ion-list>
 </ion-content>
