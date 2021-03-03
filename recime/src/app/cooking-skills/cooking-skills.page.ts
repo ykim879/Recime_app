@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cooking-skills',
   templateUrl: './cooking-skills.page.html',
@@ -39,7 +40,8 @@ export class CookingSkillsPage implements OnInit {
 
   constructor(
     private user: UserData, public storage: Storage,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private router: Router
   ) { }
 
   ionViewDidEnter() {
@@ -75,13 +77,16 @@ export class CookingSkillsPage implements OnInit {
     this.alertController.create({
       header: 'Are you sure you want to go back?',
       message: 'Your changes will not be saved',
+      cssClass: 'buttonCss',
       buttons: [{
+        cssClass: 'yes-button',
         text: 'Yes, go back',
         handler: () => {
-          console.log("Yes")
+          this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
         } 
       },
       { 
+        cssClass: 'no-button',
         text: 'No',
         handler: () => {
           console.log("No clicked")
