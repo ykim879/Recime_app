@@ -44,7 +44,9 @@
   <ion-list>
     <div>
       <p class = "title">TOTAL COOK TIME<br /> </p>
-      <ion-range id="dual-range" min="0" max="120" step="30" value="30" snaps ticks = "true" dual-knobs pin color="warning">
+      <ion-range id="dual-range" min="0" max="120" step="30" value="30"
+      snaps ticks = "true" dual-knobs pin color="warning"
+      [(ngModel)]="time" (ionChange)="setBadge(time)">
       <ion-label>0 min</ion-label>
       </ion-range>
       <ion-row> 
@@ -58,6 +60,17 @@
       <!--change the pin color https://ionicframework.com/docs/theming/colors-->
     </div>
     <!--use ion-chip for the item buttons-->
+    <div>
+      <p class = "title">COURSE<br /> </p>
+      <ion-select interface="popover"> <!--visual-->
+        <ion-select-option value="nes">NES</ion-select-option>
+        <ion-select-option value="n64">Nintendo64</ion-select-option>
+        <ion-select-option value="ps">PlayStation</ion-select-option>
+        <ion-select-option value="genesis">Sega Genesis</ion-select-option>
+        <ion-select-option value="saturn">Sega Saturn</ion-select-option>
+        <ion-select-option value="snes">SNES</ion-select-option>
+      </ion-select>
+    </div>
   </ion-list>
 </ion-content>
 <ion-footer>
