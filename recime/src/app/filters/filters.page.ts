@@ -30,7 +30,6 @@ export class FiltersPage implements OnInit {
 }
 selectCourse(course) {
   this.courses.add(course);
-  console.log(this.courses);
 }
 deleteCourse(course) {
   this.courses.delete(course);
@@ -48,6 +47,6 @@ deleteIngredients(ingredient) {
   this.ingredients.delete(ingredient);
 }
 saveSkills() {
-//To Do!
+//To Do! save changes
 }
 }
