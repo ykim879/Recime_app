@@ -29,6 +29,7 @@
   -ms-flex-align: center;
   align-items: center;
 }
+
 </style>
 <ion-header>
   <ion-toolbar class = "new-background-color">
@@ -61,15 +62,36 @@
     </div>
     <!--use ion-chip for the item buttons-->
     <div>
-      <p class = "title">COURSE<br /> </p>
-      <ion-select interface="popover"> <!--visual-->
-        <ion-select-option value="nes">NES</ion-select-option>
-        <ion-select-option value="n64">Nintendo64</ion-select-option>
-        <ion-select-option value="ps">PlayStation</ion-select-option>
-        <ion-select-option value="genesis">Sega Genesis</ion-select-option>
-        <ion-select-option value="saturn">Sega Saturn</ion-select-option>
-        <ion-select-option value="snes">SNES</ion-select-option>
+      <p class = "title">INGREDIENTS<br /> </p>
+      <ion-select [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" interface="popover" [(ngModel)] = "ingredient"  (ionChange)="selectIngredients(ingredient)" > <!--visual-->
+        <ion-select-option *ngFor="let ingredient of userIngredients">{{ingredient}}</ion-select-option>
       </ion-select>
+      <ion-chip outline color="warning"  *ngFor="let ingredient of ingredients" (click) = "deleteIngredients(ingredient)">
+        <ion-label>{{ingredient}}</ion-label>
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-chip>
+    </div>
+    <div>
+      <p class = "title">COURSE<br /> </p>
+      <ion-select [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" interface="popover" [(ngModel)] = "course"  (ionChange)="selectCourse(course)" > <!--visual-->
+        <ion-select-option value="course1">course1</ion-select-option>
+        <ion-select-option value="course2">course2</ion-select-option>
+      </ion-select>
+      <ion-chip outline color="warning"  *ngFor="let course of courses" (click) = "deleteCourse(course)">
+        <ion-label>{{course}}</ion-label>
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-chip>
+    </div>
+    <div>
+      <p class = "title">CUISINE TYPE<br /> </p>
+      <ion-select [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" interface="popover" [(ngModel)] = "cuisine"  (ionChange)="selectCuisine(cuisine)" > <!--visual-->
+        <ion-select-option value="course1">course1</ion-select-option>
+        <ion-select-option value="course2">course2</ion-select-option>
+      </ion-select>
+      <ion-chip outline color="warning"  *ngFor="let cuisine of cuisines" (click) = "deleteCourse(cuisine)">
+        <ion-label>{{cuisine}}</ion-label>
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-chip>
     </div>
   </ion-list>
 </ion-content>
@@ -78,7 +100,3 @@
   <!-- test user storage -->
   <!-- <ion-button class = "center" (click)="loadData()">Load Data</ion-button> -->
 </ion-footer>
-<script>
-  const dualRange = document.querySelector('#dual-range');
-  dualRange.value = { lower: 33, upper: 60 };
-</script>
