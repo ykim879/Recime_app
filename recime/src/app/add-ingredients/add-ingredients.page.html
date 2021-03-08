@@ -11,13 +11,14 @@
     </ion-button>
   </div>
   <h4 class="ingredients-subtitle">Search and add ingredients to your pantry.</h4>
-  <ion-searchbar class="ingredients-search"></ion-searchbar>
+  <ion-searchbar (ionChange) = "refresh()" class="ingredients-search" placeholder="Search Ingredients"
+  [(ngModel)] = "searchTerm" ></ion-searchbar>
   <ion-list>
     <ion-item button
               detail="false"
-              *ngFor="let ingredient of ingredientsList"
+              *ngFor="let ingredient of ingredientsList | filter: searchTerm"
               (click)="toggleIngredient(ingredient)">
-      {{ingredient}}
+      {{ingredient.name}}
     </ion-item>
   </ion-list>
 </ion-content>
