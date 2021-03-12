@@ -8,7 +8,7 @@ export class UserData {
     cookingSkills: string = '';
     dietaryRestrictions: string[] = [];
     kitchenTools: string[] = [];
-    pantryIngredients: Set<string> = new Set();
+    pantryIngredients: Object[] = [];
 
     constructor(public storage: Storage) { }
 
@@ -42,8 +42,11 @@ export class UserData {
         }
     }
 
-    addPantryIngredient(ingredient: string): void {
-      this.pantryIngredients.add(ingredient);
-      this.storage.set('ingredients', this.pantryIngredients);
+    addPantryIngredient(ingredient: Object): void {
+        this.pantryIngredients.push(ingredient);
+    }
+    
+    removePantryIngredient(index): void {
+        this.pantryIngredients.splice(index, 1);
     }
 }

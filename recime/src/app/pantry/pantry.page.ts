@@ -11,19 +11,30 @@ import { Storage } from '@ionic/storage';
 export class PantryPage implements OnInit {
 @ViewChild('userIngredientsList', { static: true })  userIngredientsList: IonList;
   ingredients: any = [];
-  testIngredients: any =[];
+  displayIngredients: any =[];
   public searchTerm: string;
 
-  //check more angular stuffs 
-  test = this.user.cookingSkills;
+  constructor(private user: UserData, public storage: Storage) { }
 
-  constructor(private user: UserData, public storage: Storage) {}
+  ngOnInit() {}
 
-  ngOnInit() {
-    this.testIngredients = [{name: "potato"}, {name: "cabbage"}] ;
+  ionViewDidLeave() {
+    this.displayIngredients = [];
+  }
+
+  ionViewWillEnter() {
+    this.storage.get("ingredients").then((val) => {
+      for (let i = 0; i < val.length; i++) {
+        this.displayIngredients.push(val[i]);
+      }
+    });
+    console.log("DI", this.displayIngredients)
   }
 
   remove(i) {
-    this.testIngredients.splice(i, 1);
+    this.user.removePantryIngredient(i);
+    this.displayIngredients.splice(i, 1);
+    this.storage.set("ingredients", this.displayIngredients);
+
   }
 }
