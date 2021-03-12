@@ -46,7 +46,12 @@ const routes: Routes = [
               {
                 path: 'filters',
                 loadChildren: () => import('../filters/filters.module').then( m => m.FiltersPageModule)
-              }
+               }
+              ,
+               {
+                 path: 'recipe',
+                 loadChildren: () => import('../recipe/recipe.module').then( m => m.RecipePageModule)
+               }
             ]
         },
         {
