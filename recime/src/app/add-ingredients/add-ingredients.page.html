@@ -1,14 +1,11 @@
 <ion-content class="body">
+  <ion-toolbar class="add-ingredient-back">
+    <ion-buttons slot="start" class = "custom-back">
+    <ion-back-button  [defaultHref]="defaultHref"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
   <div class="ingredients-header">
     <h3 class="ingredients-title">Add Ingredients</h3>
-    <ion-button fill="clear"
-                size="default"
-                color="danger"
-                class="add-button">
-      <ion-icon slot="icon-only"
-                name="add-circle-outline">
-      </ion-icon>
-    </ion-button>
   </div>
   <h4 class="ingredients-subtitle">Search and add ingredients to your pantry.</h4>
   <ion-searchbar (ionChange) = "refresh()" class="ingredients-search" placeholder="Search Ingredients"

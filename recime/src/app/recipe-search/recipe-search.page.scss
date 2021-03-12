@@ -1,5 +1,5 @@
 .body {
-  background-color: #FAF7F2;
+  --background: #FAF7F2;
 }
 
 .recipe-title {
@@ -23,4 +23,36 @@
 .recipe-search {
   margin-left: 45px;
   margin-right: 25px;
+}
+
+.recipe-list {
+  position: absolute;
+  top: 146px;
+  left: 22px;
+  width: 331px;
+}
+
+.recipe-label {
+  margin-left: 20px;
+}
+
+.recipe-image {
+  width: 100px;
+  height: 100px;
+}
+
+.recipe-item {
+  margin: 10px auto;
+  --background: white;
+  --border-style: none;
+  --border-radius: 5px;
+}
+
+.heart {
+  color: #E16033;
+}
+
+.liked {
+  --background: none;
+  --background-activated: none;
 }

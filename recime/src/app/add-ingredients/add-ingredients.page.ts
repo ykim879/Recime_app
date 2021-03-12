@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { UserData } from '../user-data';
 import {HttpClient, HttpClientJsonpModule} from '@angular/common/http';
@@ -10,9 +10,10 @@ import {HttpParams} from '@angular/common/http';
   templateUrl: './add-ingredients.page.html',
   styleUrls: ['./add-ingredients.page.scss'],
 })
-export class AddIngredientsPage implements OnInit, OnDestroy {
-//@ViewChild('userIngredientsList', { static: true })  userIngredientsList: IonList;
-  selectedIngredients: Set<string>;
+export class AddIngredientsPage implements OnInit {
+
+  defaultHref = '';
+  selectedIngredients: Object[] = [];
   //ingredients$: Observable<any>;
   //http: HttpClient;
   
@@ -27,7 +28,11 @@ export class AddIngredientsPage implements OnInit, OnDestroy {
   constructor(private storage: Storage, private user: UserData, private http:HttpClient) { }
 
   ngOnInit() {
-    this.selectedIngredients = this.user.pantryIngredients
+    this.storage.get("ingredients").then((val) => {
+      for (let i = 0; i < val.length; i++) {
+        this.selectedIngredients.push(val[i]);
+      }
+    });
     //this.ingredientList = this.searchIngredients(this.searchTerm)
     /*this.searchIngredients("app").subscribe({
       next: any =>{
@@ -35,17 +40,30 @@ export class AddIngredientsPage implements OnInit, OnDestroy {
       }
     })*/
   }
-
-  toggleIngredient(ingredient: string) {
-    if (this.selectedIngredients.has(ingredient))
-      this.selectedIngredients.delete(ingredient)
-    else
-      this.selectedIngredients.add(ingredient)
+  
+  ionViewDidEnter() {
+    this.defaultHref = '../pantry';
   }
 
-  ngOnDestroy() {
-    this.selectedIngredients.forEach(
-      (ingredient) => this.user.addPantryIngredient(ingredient))
+  ionViewWillLeave() {
+    this.storage.set("ingredients", this.selectedIngredients);
+  }
+    
+  toggleIngredient(ingredient: any) {
+    let name = ingredient.name;
+    let exists = false;
+    this.storage.get("ingredients").then((val) => {
+      for (let i = 0; i < val.length; i++) {
+        if (name === val[i].name) {
+          exists = true;
+          break;
+        }
+      }
+      if (!exists) {
+        this.selectedIngredients.push(ingredient);
+        this.user.addPantryIngredient(ingredient);
+      }
+    });
   }
 
   searchIngredients(entry: string): Observable<any> {

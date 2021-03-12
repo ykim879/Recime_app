@@ -1,7 +1,7 @@
 <ion-content class="body">
   <h3 class="recipe-title">Recipe Finder</h3>
   <div class="recipe-search">
-    <h4 class="recipe-header">Recipes({{0}})</h4>
+    <h4 class="recipe-header">Recipes({{dummyRecipes.length}})</h4>
     <ion-button fill="clear"
                 size="default"
                 color="danger"
@@ -12,4 +12,33 @@
       </ion-icon>
     </ion-button>
   </div>
+  <div class="recipe-list">
+    <ion-list *ngFor="let recipe of dummyRecipes; let i = index">
+      <ion-item class="recipe-item" routerLink="/route/to/page/{{recipe.name}}">
+        <!-- routerLink="/route/to/page/{{recipe.name}}" -->
+        <ion-button class="liked" (click)="toggleLike(i)">
+          <ion-icon *ngIf="!recipe.liked" name="heart-outline" class="heart"></ion-icon>
+          <ion-icon *ngIf="recipe.liked" name="heart" class="heart"></ion-icon>
+        </ion-button>
+        
+        <ion-thumbnail class="recipe-image">
+          <img src={{recipe.image}}>
+        </ion-thumbnail>
+        <ion-label class="recipe-label">
+          <h3>{{recipe.name}}</h3>
+          <p>
+            {{recipe.ingHave}} / {{recipe.ingTotal}} ingredients
+          </p>
+          <p>
+            {{recipe.min}} min
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
+
+<!-- <ion-button (click)="toggleFavorite()">
+        <ion-icon *ngIf="!isFavorite" slot="icon-only" name="star-outline"></ion-icon>
+        <ion-icon *ngIf="isFavorite" slot="icon-only" name="star"></ion-icon>
+      </ion-button> -->
