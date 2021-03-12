@@ -9,6 +9,7 @@ export class UserData {
     dietaryRestrictions: string[] = [];
     kitchenTools: string[] = [];
     pantryIngredients: Object[] = [];
+    currRecipe: any;
 
     constructor(public storage: Storage) { }
 
@@ -48,5 +49,9 @@ export class UserData {
     
     removePantryIngredient(index): void {
         this.pantryIngredients.splice(index, 1);
+    }
+
+    updateCurrRecipe(recipe: Object): void{
+        this.currRecipe = recipe;
     }
 }

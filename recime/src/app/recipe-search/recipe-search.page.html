@@ -14,7 +14,7 @@
   </div>
   <div class="recipe-list">
     <ion-list *ngFor="let recipe of dummyRecipes; let i = index">
-      <ion-item class="recipe-item" routerLink="/route/to/page/{{recipe.name}}">
+      <ion-item class="recipe-item" routerLink="/tabs/recipe-search/recipe" (click)="updateCurrRecipe(i)">
         <!-- routerLink="/route/to/page/{{recipe.name}}" -->
         <ion-button class="liked" (click)="toggleLike(i)">
           <ion-icon *ngIf="!recipe.liked" name="heart-outline" class="heart"></ion-icon>

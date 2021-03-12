@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserData } from '../user-data';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-recipe-search',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-search.page.scss'],
 })
 export class RecipeSearchPage implements OnInit {
+
+  currRecipe: any;
 
   //dummy data to be filled in with the selected recipes from the API and algorithm
   dummyRecipes = [
@@ -35,8 +39,9 @@ export class RecipeSearchPage implements OnInit {
     }
   ];
 
-  constructor() { }
-
+  constructor(
+    private user: UserData, public storage: Storage
+  ) { }
   ngOnInit() {
   }
 
@@ -44,4 +49,7 @@ export class RecipeSearchPage implements OnInit {
     this.dummyRecipes[index].liked = !this.dummyRecipes[index].liked;
   }
 
+  updateCurrRecipe(index) {
+    this.user.updateCurrRecipe(this.dummyRecipes[index]);
+  }
 }

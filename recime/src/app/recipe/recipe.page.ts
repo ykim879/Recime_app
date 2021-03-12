@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserData } from '../user-data';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-recipe',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipePage implements OnInit {
 
-  constructor() { }
+  recipe: any;
+
+  constructor(
+    private user: UserData, public storage: Storage
+  ) { }
 
   ngOnInit() {
+    this.recipe = this.user.currRecipe;
   }
 
 }
