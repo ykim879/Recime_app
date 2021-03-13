@@ -3,6 +3,8 @@ import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import {NavController, NavParams} from '@ionic/angular';
+
 @Component({
   selector: 'app-cooking-skills',
   templateUrl: './cooking-skills.page.html',
@@ -16,6 +18,7 @@ export class CookingSkillsPage implements OnInit {
   selectedRadioItem: any;
   selectedRadioGroup: any;
   clicked: boolean;
+  
   
   skillList = [
     {
@@ -41,9 +44,12 @@ export class CookingSkillsPage implements OnInit {
   constructor(
     private user: UserData, public storage: Storage,
     public alertController: AlertController,
-    private router: Router
+    private router: Router,
+    public navCtrl: NavController
   ) { }
-
+  pushPage(){
+    this.navCtrl.push(CookingSkillsPage);
+  }
   ionViewDidEnter() {
     this.defaultHref = '../cooking-skills';
     this.clicked = true;
@@ -71,33 +77,41 @@ export class CookingSkillsPage implements OnInit {
     this.storage.set("skill", this.user.cookingSkills);
     this.clicked = true;
   }
+
+  ionViewCanLeave(): boolean {
+    this.showAlert();
+    return this.clicked;
+  }
+  
 //alert info : https://www.freakyjolly.com/ionic-alert-this-alertcontroller-create/#.YD69NmhKhPY
+//https://ionicframework.com/docs/v3/api/navigation/NavController/#nav-guards
   showAlert() {
     if(!this.clicked) {
-    this.alertController.create({
-      header: 'Are you sure you want to go back?',
-      message: 'Your changes will not be saved',
-      cssClass: 'buttonCss',
-      buttons: [{
-        cssClass: 'yes-button',
-        text: 'Yes, go back',
-        handler: () => {
-          this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
-        } 
-      },
-      { 
-        cssClass: 'no-button',
-        text: 'No',
-        handler: () => {
-          console.log("No clicked")
-        }
-      }]
-    }).then(res => {
+      this.alertController.create({
+        header: 'Are you sure you want to go back?',
+        message: 'Your changes will not be saved',
+        cssClass: 'buttonCss',
+        buttons: [{
+          cssClass: 'yes-button',
+          text: 'Yes, go back',
+          handler: () => {
+            this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
+            this.clicked = false;
+          } 
+        },
+        { 
+          cssClass: 'no-button',
+          text: 'No',
+          handler: () => {
+            this.clicked = true;
+          }
+        }]
+      }).then(res => {
 
-      res.present();
-
-    });
-  }
+        res.present();
+  
+      });
+    }
   }
 
   // test user storage for skills
