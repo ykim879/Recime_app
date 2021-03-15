@@ -15,7 +15,13 @@
               detail="false"
               *ngFor="let ingredient of ingredientsList | filter: searchTerm"
               (click)="toggleIngredient(ingredient)">
-      {{ingredient.name}}
+      <!-- {{ingredient.name}} -->
+      <ion-thumbnail>
+        <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}">
+      </ion-thumbnail>
+      <div class="ingredient-name">
+        {{ingredient.name}}
+      </div>
     </ion-item>
   </ion-list>
 </ion-content>

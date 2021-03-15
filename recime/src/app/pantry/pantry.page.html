@@ -65,9 +65,13 @@
     <ion-list>
       <ion-item-sliding *ngFor="let ingredient of displayIngredients | filter: searchTerm; let i = index" (ionSwipe)="delete(item)">
         <!-- <ion-item (click)="itemDetails($event, item)"> -->
-          <!-- <ion-thumbnail>{{ingredient.image}}</ion-thumbnail> -->
           <ion-item>
-          {{ingredient.name}}
+            <ion-thumbnail>
+              <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}">
+            </ion-thumbnail>
+            <div class="ingredient-name">
+              {{ingredient.name}}
+            </div>
           <!-- <ion-label>Item</ion-label> -->
         </ion-item>
         <ion-item-options>
