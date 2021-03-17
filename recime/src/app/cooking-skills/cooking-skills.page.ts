@@ -2,6 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit,ViewChild } from '@angular/
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import {NavController, NavParams} from '@ionic/angular';
 
@@ -45,10 +46,10 @@ export class CookingSkillsPage implements OnInit {
     private user: UserData, public storage: Storage,
     public alertController: AlertController,
     private router: Router,
-    public navCtrl: NavController
+    public navCtrl: NavController, private location: Location
   ) { }
   ionViewDidEnter() {
-    this.defaultHref = '../cooking-skills';
+    
     this.clicked = true;
   }
 
@@ -57,6 +58,7 @@ export class CookingSkillsPage implements OnInit {
     this.storage.get("skill").then((val) => {
       this.chosen_skill = val;
     });
+    this.defaultHref = '../cooking-skills';
   }
 
   radioGroupChange(event) {
@@ -74,15 +76,20 @@ export class CookingSkillsPage implements OnInit {
     this.storage.set("skill", this.user.cookingSkills);
     this.clicked = true;
   }
-  async ionViewCanLeave() {
+  canDeactivate() : boolean {
     console.log("test!");
-    const shouldLeave = await this.confirmLeave();
-    return shouldLeave;
+    if (!this.clicked) {
+      return false;
+    }
+    return true;
   }
   //https://www.debugcn.com/en/article/74127847.html
   ionViewWillLeave() {
     console.log("leaving");
-    this.showAlert();
+    if (!this.clicked) {
+      //this.location.back();
+      this.showAlert();
+    }
   }
   confirmLeave(): Promise<Boolean> {
     let resolveLeaving;
@@ -145,6 +152,9 @@ export class CookingSkillsPage implements OnInit {
       });
     }
   }
+  ngOnDestroy(){
+    console.log("sup nerds? I should be destroyed now right?");
+ }
 
   // test user storage for skills
   // loadData() {

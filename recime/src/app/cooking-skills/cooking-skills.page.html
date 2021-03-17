@@ -35,11 +35,12 @@
   align-items: center;
 }
 </style>
+<ion-nav [root]="CookingSkillsPage"></ion-nav>
 <ion-header>
   <ion-toolbar class = "new-background-color">
     <ion-buttons slot="start">
     <ion-alert-controller></ion-alert-controller>
-    <ion-back-button color = "dark" (click) = "showAlert()"></ion-back-button>
+    <ion-back-button color = "dark"></ion-back-button>
     </ion-buttons>
     <ion-title>Cooking Skill Level</ion-title>
   </ion-toolbar>

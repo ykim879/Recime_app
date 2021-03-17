@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import {HttpClientModule} from '@angular/common/http';
+import {NavController} from '@ionic/angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,4 +18,9 @@ import {HttpClientModule} from '@angular/common/http';
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(
+    public navCtrl: NavController
+   ){}
+ 
+}
