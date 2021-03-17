@@ -47,9 +47,6 @@ export class CookingSkillsPage implements OnInit {
     private router: Router,
     public navCtrl: NavController
   ) { }
-  pushPage(){
-    this.navCtrl.push(CookingSkillsPage);
-  }
   ionViewDidEnter() {
     this.defaultHref = '../cooking-skills';
     this.clicked = true;
@@ -77,12 +74,44 @@ export class CookingSkillsPage implements OnInit {
     this.storage.set("skill", this.user.cookingSkills);
     this.clicked = true;
   }
+  async ionViewCanLeave() {
+    console.log("test!");
+    const shouldLeave = await this.confirmLeave();
+    return shouldLeave;
+  }
+  
+  confirmLeave(): Promise<Boolean> {
+    let resolveLeaving;
+    const canLeave = new Promise<Boolean>(resolve => resolveLeaving = resolve);
+    const alert = this.alertController.create({
+      header: 'Confirm leave',
+      message: 'Do you want to leave the page?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => resolveLeaving(false)
+        },
+        {
+          text: 'Yes',
+          handler: () => resolveLeaving(true)
+        }
+      ]
+    }).then(res => {
 
+      res.present();
+
+    });
+    return canLeave
+  }
+
+/*
   ionViewCanLeave(): boolean {
+    console.log("The view can leave?");
     this.showAlert();
     return this.clicked;
   }
-  
+  */
 //alert info : https://www.freakyjolly.com/ionic-alert-this-alertcontroller-create/#.YD69NmhKhPY
 //https://ionicframework.com/docs/v3/api/navigation/NavController/#nav-guards
   showAlert() {
