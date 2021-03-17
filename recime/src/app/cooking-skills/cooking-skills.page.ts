@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit,ViewChild } from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
@@ -79,7 +79,11 @@ export class CookingSkillsPage implements OnInit {
     const shouldLeave = await this.confirmLeave();
     return shouldLeave;
   }
-  
+  //https://www.debugcn.com/en/article/74127847.html
+  ionViewWillLeave() {
+    console.log("leaving");
+    this.showAlert();
+  }
   confirmLeave(): Promise<Boolean> {
     let resolveLeaving;
     const canLeave = new Promise<Boolean>(resolve => resolveLeaving = resolve);
@@ -136,7 +140,6 @@ export class CookingSkillsPage implements OnInit {
           }
         }]
       }).then(res => {
-
         res.present();
   
       });
