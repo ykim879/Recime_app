@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-dietary-restrictions',
   templateUrl: './dietary-restrictions.page.html',
@@ -12,7 +12,7 @@ export class DietaryRestrictionsPage implements OnInit {
 
   defaultHref = '';
   selectedDiets: string[] = [];
-
+  clicked: boolean;
   //taken from Spoonacular API's 'Diets' and 'Intolerances' endpoints
   dietList = [
     {
@@ -106,11 +106,12 @@ export class DietaryRestrictionsPage implements OnInit {
    ];
   
   constructor(
-    private user: UserData, public storage: Storage
+    private user: UserData, public alertController: AlertController,public storage: Storage
   ) { }
 
   ionViewDidEnter() {
     this.defaultHref = '../dietary-restrictions';
+    this.clicked = true;
   }
   
   ngOnInit() {
@@ -142,10 +143,45 @@ export class DietaryRestrictionsPage implements OnInit {
       }
       
     }
+    this.clicked = false;
+  }
+  ionViewWillLeave() {
+    console.log("leaving");
+    if (!this.clicked) {
+      //this.location.back();
+      this.showAlert();
+    }
+  }
+  showAlert() {
+    if(!this.clicked) {
+      this.alertController.create({
+        header: 'Your changes have not been saved',
+        message: 'Do you wanna save your changes?',
+        cssClass: 'buttonCss',
+        buttons: [{
+          cssClass: 'yes-button',
+          text: 'Yes, save changes',
+          handler: () => {
+            //this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
+            this.saveDiets();
+          } 
+        },
+        { 
+          cssClass: 'no-button',
+          text: 'No',
+          handler: () => {
+          }
+        }]
+      }).then(res => {
+        res.present();
+  
+      });
+    }
   }
 
   saveDiets() {
     this.storage.set("diets", this.user.dietaryRestrictions);
+    this.clicked = true;
   }
 
   // test user storage of dietary restrictions

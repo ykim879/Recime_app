@@ -91,30 +91,6 @@ export class CookingSkillsPage implements OnInit {
       this.showAlert();
     }
   }
-  confirmLeave(): Promise<Boolean> {
-    let resolveLeaving;
-    const canLeave = new Promise<Boolean>(resolve => resolveLeaving = resolve);
-    const alert = this.alertController.create({
-      header: 'Confirm leave',
-      message: 'Do you want to leave the page?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => resolveLeaving(false)
-        },
-        {
-          text: 'Yes',
-          handler: () => resolveLeaving(true)
-        }
-      ]
-    }).then(res => {
-
-      res.present();
-
-    });
-    return canLeave
-  }
 
 /*
   ionViewCanLeave(): boolean {
@@ -128,22 +104,21 @@ export class CookingSkillsPage implements OnInit {
   showAlert() {
     if(!this.clicked) {
       this.alertController.create({
-        header: 'Are you sure you want to go back?',
-        message: 'Your changes will not be saved',
+        header: 'Your changes have not been saved',
+        message: 'Do you wanna save your changes?',
         cssClass: 'buttonCss',
         buttons: [{
           cssClass: 'yes-button',
-          text: 'Yes, go back',
+          text: 'Yes, save changes',
           handler: () => {
-            this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
-            this.clicked = false;
+            //this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
+            this.saveSkills();
           } 
         },
         { 
           cssClass: 'no-button',
           text: 'No',
           handler: () => {
-            this.clicked = true;
           }
         }]
       }).then(res => {

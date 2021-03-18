@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-kitchen-tools',
   templateUrl: './kitchen-tools.page.html',
@@ -11,7 +11,7 @@ export class KitchenToolsPage implements OnInit {
 
   defaultHref = '';
   selectedTools: string[] = [];
-
+  clicked: boolean;
   toolList = [
     {
       name: 'toolList',
@@ -58,11 +58,12 @@ export class KitchenToolsPage implements OnInit {
   ];
 
   constructor(
-    private user: UserData, public storage: Storage
+    private user: UserData, public alertController: AlertController, public storage: Storage
   ) { }
 
   ionViewDidEnter() {
     this.defaultHref = '../dietary-restrictions';
+    this.clicked = true;
   }
 
   ngOnInit() {
@@ -93,10 +94,43 @@ export class KitchenToolsPage implements OnInit {
           this.selectedTools.push(event.detail.value);
         }
     }
+    this.clicked = false;
   }
-
+  ionViewWillLeave() {
+    if (!this.clicked) {
+      //this.location.back();
+      this.showAlert();
+    }
+  }
+  showAlert() {
+    if(!this.clicked) {
+      this.alertController.create({
+        header: 'Your changes have not been saved',
+        message: 'Do you wanna save your changes?',
+        cssClass: 'buttonCss',
+        buttons: [{
+          cssClass: 'yes-button',
+          text: 'Yes, save changes',
+          handler: () => {
+            //this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
+            this.saveTools();
+          } 
+        },
+        { 
+          cssClass: 'no-button',
+          text: 'No',
+          handler: () => {
+          }
+        }]
+      }).then(res => {
+        res.present();
+  
+      });
+    }
+  }
   saveTools() {
     this.storage.set("tools", this.user.kitchenTools);
+    this.clicked = true;
   }
 
   // test user storage of kitchen tools
