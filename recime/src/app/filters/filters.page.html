@@ -50,8 +50,8 @@
       [(ngModel)]="time" (ionChange)="setBadge(time)">
       <ion-label>0 min</ion-label>
       </ion-range>
-      <ion-row> 
-        <ion-col>0 min</ion-col> 
+      <ion-row>
+        <ion-col>0 min</ion-col>
         <ion-col>30 min</ion-col>
         <ion-col>1 hour</ion-col>
         <ion-col>1.5 hour</ion-col>
@@ -60,16 +60,11 @@
       <!--Todo: integrate to save the information-->
       <!--change the pin color https://ionicframework.com/docs/theming/colors-->
     </div>
-    <!--use ion-chip for the item buttons-->
     <div>
       <p class = "title">INGREDIENTS<br /> </p>
-      <ion-select [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" interface="popover" [(ngModel)] = "ingredient"  (ionChange)="selectIngredients(ingredient)" > <!--visual-->
+      <ion-select multiple [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" [(ngModel)] = "ingredients"> <!--visual-->
         <ion-select-option *ngFor="let ingredient of userIngredients">{{ingredient}}</ion-select-option>
       </ion-select>
-      <ion-chip outline color="warning"  *ngFor="let ingredient of ingredients" (click) = "deleteIngredients(ingredient)">
-        <ion-label>{{ingredient}}</ion-label>
-        <ion-icon name="close-circle"></ion-icon>
-      </ion-chip>
     </div>
     <div>
       <p class = "title">COURSE<br /> </p>
@@ -77,10 +72,6 @@
         <ion-select-option value="course1">course1</ion-select-option>
         <ion-select-option value="course2">course2</ion-select-option>
       </ion-select>
-      <ion-chip outline color="warning"  *ngFor="let course of courses" (click) = "deleteCourse(course)">
-        <ion-label>{{course}}</ion-label>
-        <ion-icon name="close-circle"></ion-icon>
-      </ion-chip>
     </div>
     <div>
       <p class = "title">CUISINE TYPE<br /> </p>
@@ -88,15 +79,9 @@
         <ion-select-option value="course1">course1</ion-select-option>
         <ion-select-option value="course2">course2</ion-select-option>
       </ion-select>
-      <ion-chip outline color="warning"  *ngFor="let cuisine of cuisines" (click) = "deleteCourse(cuisine)">
-        <ion-label>{{cuisine}}</ion-label>
-        <ion-icon name="close-circle"></ion-icon>
-      </ion-chip>
     </div>
   </ion-list>
 </ion-content>
 <ion-footer>
   <ion-button class = "center" (click)="saveSkills()">Save Changes</ion-button>
-  <!-- test user storage -->
-  <!-- <ion-button class = "center" (click)="loadData()">Load Data</ion-button> -->
 </ion-footer>
