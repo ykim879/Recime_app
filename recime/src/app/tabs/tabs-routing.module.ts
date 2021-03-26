@@ -10,6 +10,16 @@ const routes: Routes = [
     children:
       [
         {
+          path: 'onboard',
+          children:
+          [
+            {
+              path: '',
+              loadChildren: () => import('../onboard/onboard.module').then( m => m.OnboardPageModule)
+            },
+          ]
+        },
+        {
           path: 'profile',
           children:
             [
@@ -82,7 +92,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/profile',
+    redirectTo: '/tabs/onboard',
     pathMatch: 'full'
   }
 ];

@@ -1,0 +1,71 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>onboard</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+
+  <ion-slides>
+
+    <ion-slide>
+      <div class="recime-blob">
+        <img src= "../../assets/icon/recime_blob.png">
+      </div>
+      
+      <a routerLink="/tabs/profile"><button class = "skip"><img  width = "34" height = "24" src = "../../assets/icon/skip.png"></button></a>
+    </ion-slide>
+
+    <ion-slide>
+      <img src= "../../assets/icon/setup-profile.png">
+     
+    </ion-slide>
+
+    <ion-slide>
+      <img src= "../../assets/icon/onboard-pantry.png">
+      
+    </ion-slide>
+
+    <ion-slide>
+      <img src= "../../assets/icon/onboard-recipe.png">
+     
+    </ion-slide>
+
+    <ion-slide>
+      <img src= "../../assets/icon/get-started.png">
+      <a routerLink="/tabs/profile"><button class = "get-started"><img  width = "34" height = "24" src = "../../assets/icon/get-started-button.png"></button></a>
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>
+
+<style>
+  ion-slides {
+    height: 100%;
+  }
+
+  .swiper-slide {
+    display: block;
+  }
+
+  .recime-blob {
+    position: relative;
+    top: 95px;
+  }
+
+  .skip {
+    position: absolute;
+
+    top: 500px;
+    left: 165px;
+    background: none;
+  }
+
+  .get-started {
+    position: relative;
+    top: 100px;
+    background: none;
+  }
+
+</style>
