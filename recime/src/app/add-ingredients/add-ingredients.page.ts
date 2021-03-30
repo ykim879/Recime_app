@@ -4,6 +4,7 @@ import { UserData } from '../user-data';
 import {HttpClient, HttpClientJsonpModule} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {HttpParams} from '@angular/common/http';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-ingredients',
@@ -12,11 +13,11 @@ import {HttpParams} from '@angular/common/http';
 })
 export class AddIngredientsPage implements OnInit {
 
-  defaultHref = '';
+  defaultHref = 'tabs/pantry'
   selectedIngredients: Object[] = [];
   //ingredients$: Observable<any>;
   //http: HttpClient;
-  
+
   url = 'https://api.spoonacular.com/food/ingredients/autocomplete';
   apiKey = 'e98938cf995944c58f06dea4ea7ad8bc';
   public searchTerm: string;
@@ -25,7 +26,10 @@ export class AddIngredientsPage implements OnInit {
   // This is a place holder for what will be the actual list of ingredients coming from the backend
   ingredientsList: any = [] //['apple', 'banana', 'carrot', 'potato', 'cabbage']
 
-  constructor(private storage: Storage, private user: UserData, private http:HttpClient) { }
+  constructor(private storage: Storage,
+              private user: UserData,
+              private http:HttpClient,
+              public toastController:ToastController) { }
 
   ngOnInit() {
     this.storage.get("ingredients").then((val) => {
@@ -33,22 +37,21 @@ export class AddIngredientsPage implements OnInit {
         this.selectedIngredients.push(val[i]);
       }
     });
-    //this.ingredientList = this.searchIngredients(this.searchTerm)
-    /*this.searchIngredients("app").subscribe({
-      next: any =>{
-        this.ingredientsList= any 
-      }
-    })*/
-  }
-  
-  ionViewDidEnter() {
-    this.defaultHref = '../pantry';
   }
 
   ionViewWillLeave() {
     this.storage.set("ingredients", this.selectedIngredients);
   }
-    
+
+  async presentToast(ingredient: any) {
+    const toast = await this.toastController.create({
+      message: this.titleCase(ingredient.name) + ' has been added.',
+      duration: 2000,
+      color: "dark"
+    });
+    toast.present();
+  }
+
   toggleIngredient(ingredient: any) {
     let name = ingredient.name;
     let exists = false;
@@ -64,6 +67,7 @@ export class AddIngredientsPage implements OnInit {
         this.user.addPantryIngredient(ingredient);
       }
     });
+    this.presentToast(ingredient)
   }
 
   searchIngredients(entry: string): Observable<any> {
@@ -82,5 +86,13 @@ export class AddIngredientsPage implements OnInit {
   refresh() {
     let apiresults = this.searchIngredients(this.searchTerm)
     this.ingredientsList = this.il;
+  }
+
+  titleCase(str) {
+    str = str.split(' ');
+    for (var i = 0; i < str.length; i++) {
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(' ');
   }
 }

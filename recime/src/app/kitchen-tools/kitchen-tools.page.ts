@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
-import { AlertController } from '@ionic/angular';
+import {AlertController, ToastController} from '@ionic/angular';
 @Component({
   selector: 'app-kitchen-tools',
   templateUrl: './kitchen-tools.page.html',
@@ -58,7 +58,10 @@ export class KitchenToolsPage implements OnInit {
   ];
 
   constructor(
-    private user: UserData, public alertController: AlertController, public storage: Storage
+    private user: UserData,
+    public alertController: AlertController,
+    public storage: Storage,
+    public toastController:ToastController
   ) { }
 
   ionViewDidEnter() {
@@ -114,9 +117,9 @@ export class KitchenToolsPage implements OnInit {
           handler: () => {
             //this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
             this.saveTools();
-          } 
+          }
         },
-        { 
+        {
           cssClass: 'no-button',
           text: 'No',
           handler: () => {
@@ -124,20 +127,21 @@ export class KitchenToolsPage implements OnInit {
         }]
       }).then(res => {
         res.present();
-  
+
       });
     }
   }
   saveTools() {
     this.storage.set("tools", this.user.kitchenTools);
     this.clicked = true;
+    this.presentToast()
   }
-
-  // test user storage of kitchen tools
-  // loadData() {
-  //   this.storage.get("tools").then((val) => {
-  //     console.log("Kitchen tools: ", val);
-  //   });
-  // }
-
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Changes have been saved.',
+      duration: 2000,
+      color: "dark"
+    });
+    toast.present();
+  }
 }

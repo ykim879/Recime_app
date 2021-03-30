@@ -4,7 +4,6 @@
 
 .ingredients-header {
   width: 83%;
-  margin-top: 20px;
   margin-left: 40px;
 }
 
@@ -33,14 +32,21 @@
 }
 
 .add-ingredient-back {
-  --background: #FAF7F2;
+  --background: #F8CB71;
 }
 
 .ingredient-name {
   padding: 20px;
   font-weight: bold;
+  font-size: x-large;
+  vertical-align: middle;
 }
 
 ion-back-button {
   color: #202020;
+}
+
+.card-image{
+  float: left;
+  padding-right: 10px;
 }

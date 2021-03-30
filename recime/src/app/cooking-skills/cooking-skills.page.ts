@@ -1,7 +1,7 @@
 import { Component, ComponentFactoryResolver, OnInit,ViewChild } from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
-import { AlertController } from '@ionic/angular';
+import {AlertController, ToastController} from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import {NavController, NavParams} from '@ionic/angular';
@@ -11,7 +11,7 @@ import {NavController, NavParams} from '@ionic/angular';
   templateUrl: './cooking-skills.page.html',
   styleUrls: ['./cooking-skills.page.scss'],
 })
-// priority of back button 
+// priority of back button
 export class CookingSkillsPage implements OnInit {
 
   defaultHref = '';
@@ -19,8 +19,8 @@ export class CookingSkillsPage implements OnInit {
   selectedRadioItem: any;
   selectedRadioGroup: any;
   clicked: boolean;
-  
-  
+
+
   skillList = [
     {
       name: 'skillList',
@@ -43,13 +43,15 @@ export class CookingSkillsPage implements OnInit {
   ];
 
   constructor(
-    private user: UserData, public storage: Storage,
+    private user: UserData,
+    public storage: Storage,
     public alertController: AlertController,
     private router: Router,
-    public navCtrl: NavController, private location: Location
+    public navCtrl: NavController,
+    private location: Location,
+    public toastController:ToastController
   ) { }
   ionViewDidEnter() {
-    
     this.clicked = true;
   }
 
@@ -75,6 +77,7 @@ export class CookingSkillsPage implements OnInit {
     this.user.setSkillLevel(this.selectedRadioGroup.value);
     this.storage.set("skill", this.user.cookingSkills);
     this.clicked = true;
+    this.presentToast();
   }
   canDeactivate() : boolean {
     console.log("test!");
@@ -91,6 +94,15 @@ export class CookingSkillsPage implements OnInit {
       this.showAlert();
     }
   }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Changes have been saved.',
+      duration: 2000,
+      color: "dark"
+    });
+    toast.present();
+  }
+
 
 /*
   ionViewCanLeave(): boolean {
@@ -113,9 +125,9 @@ export class CookingSkillsPage implements OnInit {
           handler: () => {
             //this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
             this.saveSkills();
-          } 
+          }
         },
-        { 
+        {
           cssClass: 'no-button',
           text: 'No',
           handler: () => {
@@ -123,7 +135,7 @@ export class CookingSkillsPage implements OnInit {
         }]
       }).then(res => {
         res.present();
-  
+
       });
     }
   }

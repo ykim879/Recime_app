@@ -1,27 +1,29 @@
-<ion-content class="body">
+<ion-header>
   <ion-toolbar class="add-ingredient-back">
     <ion-buttons slot="start" class = "custom-back">
-    <ion-back-button  [defaultHref]="defaultHref"></ion-back-button>
+      <ion-back-button  [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
+</ion-header>
+<ion-content class="body">
   <div class="ingredients-header">
     <h3 class="ingredients-title">Add Ingredients</h3>
   </div>
   <h4 class="ingredients-subtitle">Search and add ingredients to your pantry.</h4>
-  <ion-searchbar (ionChange) = "refresh()" class="ingredients-search" placeholder="Search Ingredients"
-  [(ngModel)] = "searchTerm" ></ion-searchbar>
+  <ion-searchbar (ionChange) = "refresh()"
+                 class="ingredients-search"
+                 placeholder="Search Ingredients"
+                 [(ngModel)] = "searchTerm">
+  </ion-searchbar>
   <ion-list>
-    <ion-item button
+    <ion-card button
               detail="false"
               *ngFor="let ingredient of ingredientsList | filter: searchTerm"
               (click)="toggleIngredient(ingredient)">
-      <!-- {{ingredient.name}} -->
-      <ion-thumbnail>
-        <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}">
-      </ion-thumbnail>
-      <div class="ingredient-name">
-        {{ingredient.name}}
-      </div>
-    </ion-item>
+      <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}" class="card-image">
+      <ion-card-title class="ingredient-name">
+        {{ingredient.name | titlecase}}
+      </ion-card-title>
+    </ion-card>
   </ion-list>
 </ion-content>

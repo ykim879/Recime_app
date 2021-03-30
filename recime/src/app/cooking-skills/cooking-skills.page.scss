@@ -1,12 +1,7 @@
 .new-background-color{
     --background: #F8CB71;
 }
-
-ion-header{
-    background-color:#FAF7F2 !important;
-}
 ion-title{
-    font-family: Poppins;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -16,7 +11,7 @@ ion-button {
     --background: #F8CB71 !important;
     --background-activated: #E16033 !important;
 }
-ion-button-back {
+ion-back-button {
     color: #F8CB71 !important;
     color-focused: #E16033 !important;
 }

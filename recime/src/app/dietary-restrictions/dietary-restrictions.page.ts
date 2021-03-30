@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
-import { AlertController } from '@ionic/angular';
+import {AlertController, ToastController} from '@ionic/angular';
 @Component({
   selector: 'app-dietary-restrictions',
   templateUrl: './dietary-restrictions.page.html',
@@ -104,16 +104,18 @@ export class DietaryRestrictionsPage implements OnInit {
       isChecked: false
     }
    ];
-  
-  constructor(
-    private user: UserData, public alertController: AlertController,public storage: Storage
+
+  constructor(private user: UserData,
+              public alertController: AlertController,
+              public storage: Storage,
+              public toastController:ToastController
   ) { }
 
   ionViewDidEnter() {
     this.defaultHref = '../dietary-restrictions';
     this.clicked = true;
   }
-  
+
   ngOnInit() {
     //user's dietary restrictions are checked upon arrival to page
     this.storage.get("diets").then((val) => {
@@ -141,7 +143,7 @@ export class DietaryRestrictionsPage implements OnInit {
         this.user.addDietaryRestriction(event.detail.value);
         this.selectedDiets.push(event.detail.value);
       }
-      
+
     }
     this.clicked = false;
   }
@@ -164,9 +166,9 @@ export class DietaryRestrictionsPage implements OnInit {
           handler: () => {
             //this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
             this.saveDiets();
-          } 
+          }
         },
-        { 
+        {
           cssClass: 'no-button',
           text: 'No',
           handler: () => {
@@ -174,7 +176,7 @@ export class DietaryRestrictionsPage implements OnInit {
         }]
       }).then(res => {
         res.present();
-  
+
       });
     }
   }
@@ -182,13 +184,15 @@ export class DietaryRestrictionsPage implements OnInit {
   saveDiets() {
     this.storage.set("diets", this.user.dietaryRestrictions);
     this.clicked = true;
+    this.presentToast()
   }
 
-  // test user storage of dietary restrictions
-  // loadData() {
-  //   this.storage.get("diets").then((val) => {
-  //     console.log("Dietary restrictions: ", val);
-  //   });
-  // }
-
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Changes have been saved.',
+      duration: 2000,
+      color: "dark"
+    });
+    toast.present();
+  }
 }

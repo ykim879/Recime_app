@@ -1,84 +1,40 @@
-<style>
-  h3 {
-      margin-left: 50px;
-      margin-top: 32px;
-      font-size: 24px;
-      
-  }
-  .add-pantry {
-    position: absolute;
-    width: 90px;
-    height: 21px;
-    left: 259px;
-    border: none;
-    background: none;
-  }
- 
-  .item-remove-animate{
-  border-radius: 20px !important;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  height: 71px;
-  }
-  .searchbar{
-    position: relative;
-    top: 15px;
-  }
-  .text-block{
-    position: relative;
-    top: -40px;
-    left: 40px;
-  }
-  .title {
-
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 36px;
-
-    color: #202020;
-  }
-  </style>
-  <ion-content fullscreen>
+<ion-content fullscreen>
+  <div class="title-and-button">
     <h3 class = "pantry-title">Virtual Pantry</h3>
-    <a routerLink="/tabs/pantry/add-ingredients"><button class = "add-pantry"><img  width = "90" height = "21" src = "../../assets/icon/add_new.png"></button></a>
-    <div class="searchbar">
-      <ion-searchbar 
-        placeholder="Search Ingredients"
-        [(ngModel)] = "searchTerm" 
-      ></ion-searchbar>
-      <!-- <img src = "../../assets/icon/search.png" class = "searchbarimg">
-      <div class = "text-block">
-        <p style = "color: #C4C4C4;">Search Ingredients</p>
-      </div> -->
-    </div>
+    <ion-button fill="clear"
+                size="default"
+                color="dark"
+                class="add-button"
+                routerLink="/tabs/pantry/add-ingredients">
+      <ion-icon slot="icon-only"
+                name="add-circle-outline">
+      </ion-icon>
+    </ion-button>
+  </div>
+  <div class="searchbar">
+    <ion-searchbar
+      placeholder="Search Ingredients"
+      [(ngModel)] = "searchTerm">
+    </ion-searchbar>
+  </div>
+  <ion-list-header>
+    <p class="pantry-header">Ingredients({{displayIngredients.length}})</p>
+  </ion-list-header>
+  <ion-list>
+    <ion-item-sliding *ngFor="let ingredient of displayIngredients | filter: searchTerm; let i = index" (ionSwipe)="delete(item)">
+        <ion-item>
+          <ion-thumbnail>
+            <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}">
+          </ion-thumbnail>
+          <div class="ingredient-name">
+            {{ingredient.name | titlecase}}
+          </div>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button expandable (click)="remove(i)">Remove</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
 
-    <!-- <h class="ion-padding-start ion-padding-end">Ingredients</h> -->
-    
-    <ion-list-header>
-      <p class="pantry-header">Ingredients({{displayIngredients.length}})</p>
-    </ion-list-header>
 
-    <ion-list>
-      <ion-item-sliding *ngFor="let ingredient of displayIngredients | filter: searchTerm; let i = index" (ionSwipe)="delete(item)">
-        <!-- <ion-item (click)="itemDetails($event, item)"> -->
-          <ion-item>
-            <ion-thumbnail>
-              <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}">
-            </ion-thumbnail>
-            <div class="ingredient-name">
-              {{ingredient.name}}
-            </div>
-          <!-- <ion-label>Item</ion-label> -->
-        </ion-item>
-        <ion-item-options>
-          <button ion-button expandable (click)="remove(i)">Remove</button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-  </ion-content>
-
-  

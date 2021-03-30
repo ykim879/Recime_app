@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonList} from '@ionic/angular';
+import {IonList, ToastController} from '@ionic/angular';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
 
@@ -14,7 +14,7 @@ export class PantryPage implements OnInit {
   displayIngredients: any =[];
   public searchTerm: string;
 
-  constructor(private user: UserData, public storage: Storage) { }
+  constructor(private user: UserData, public storage: Storage, public toastController:ToastController) { }
 
   ngOnInit() {}
 
@@ -31,10 +31,27 @@ export class PantryPage implements OnInit {
     console.log("DI", this.displayIngredients)
   }
 
+  async presentToast(ingredient: any) {
+    const toast = await this.toastController.create({
+      message: this.titleCase(ingredient.name) + ' has been removed.',
+      duration: 2000,
+      color: "dark"
+    });
+    toast.present();
+  }
+
   remove(i) {
+    this.presentToast(this.displayIngredients[i])
     this.user.removePantryIngredient(i);
     this.displayIngredients.splice(i, 1);
     this.storage.set("ingredients", this.displayIngredients);
+  }
 
+  titleCase(str) {
+    str = str.split(' ');
+    for (var i = 0; i < str.length; i++) {
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(' ');
   }
 }
