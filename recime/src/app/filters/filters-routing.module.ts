@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FiltersPage } from './filters.page';
+import {DeactivateGuard, FiltersPage} from './filters.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FiltersPage
+    component: FiltersPage,
+    canDeactivate: [DeactivateGuard]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [DeactivateGuard]
 })
 export class FiltersPageRoutingModule {}
