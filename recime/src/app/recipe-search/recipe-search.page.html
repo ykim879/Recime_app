@@ -1,7 +1,7 @@
 <ion-content class="body">
   <h3 class="recipe-title">Recipe Finder</h3>
   <div class="recipe-search">
-    <h4 class="recipe-header">Recipes({{dummyRecipes.length}})</h4>
+    <h4 class="recipe-header">Recipes({{recipeList.length}})</h4>
     <ion-button fill="clear"
                 size="default"
                 color="danger"
@@ -13,26 +13,25 @@
     </ion-button>
   </div>
   <div class="recipe-list">
-    <ion-list *ngFor="let recipe of dummyRecipes; let i = index">
-      <ion-item class="recipe-item" routerLink="/tabs/recipe-search/recipe" (click)="updateCurrRecipe(i)">
-        <!-- routerLink="/route/to/page/{{recipe.name}}" -->
-        <ion-button class="liked" (click)="toggleLike(i)">
-          <ion-icon *ngIf="!recipe.liked" name="heart-outline" class="heart"></ion-icon>
-          <ion-icon *ngIf="recipe.liked" name="heart" class="heart"></ion-icon>
-        </ion-button>
-        
-        <ion-thumbnail class="recipe-image">
-          <img src={{recipe.image}}>
-        </ion-thumbnail>
-        <ion-label class="recipe-label">
-          <h3>{{recipe.name}}</h3>
-          <p>
-            {{recipe.ingHave}} / {{recipe.ingTotal}} ingredients
-          </p>
-          <p>
-            {{recipe.min}} min
-          </p>
-        </ion-label>
+    <ion-list *ngFor="let recipe of recipeList; let i = index">
+      <ion-item class="recipe-item" routerLink="./recipe/{{recipe.id}}" (click)="updateCurrRecipe(i)">
+        <!-- <ion-button class="liked" (click)="toggleLike(i)"> -->
+          <ion-icon *ngIf="!likedRecipes[i]" name="heart-outline" class="heart"></ion-icon>
+          <ion-icon *ngIf="likedRecipes[i]" name="heart" class="heart"></ion-icon>
+        <!-- </ion-button> -->
+          <ion-thumbnail class="recipe-image">
+            <img src={{recipe.image}}>
+          </ion-thumbnail>
+          <ion-label class="recipe-label">
+            <h3>{{recipe.title}}</h3>
+            <p>
+              TBD / {{recipe.extendedIngredients.length}} ingredients
+            </p>
+            <p>
+              <ion-icon name="time-outline"></ion-icon>
+              {{recipe.readyInMinutes}} min
+            </p>
+          </ion-label>
       </ion-item>
     </ion-list>
   </div>

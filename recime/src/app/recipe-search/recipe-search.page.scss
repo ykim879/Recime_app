@@ -37,8 +37,9 @@
 }
 
 .recipe-image {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
+  margin-left: 5px;
 }
 
 .recipe-item {
@@ -46,10 +47,12 @@
   --background: white;
   --border-style: none;
   --border-radius: 5px;
+  --padding-start: 5px;
 }
 
 .heart {
   color: #E16033;
+  font-size: 20px;
 }
 
 .liked {

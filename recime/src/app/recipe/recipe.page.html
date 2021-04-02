@@ -1,11 +1,91 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title class="ion-text-center">{{recipe.name}}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <img src={{recipe.image}}>
-  <p style="text-align: left;">Cook Time: {{recipe.min}}</p>
+  <ion-header>
+    <ion-toolbar class="recipe-back">
+      <ion-buttons slot="start" class = "custom-back">
+      <ion-back-button  [defaultHref]="defaultHref"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end" class = "custom-back">
+        <ion-button class="liked" (click)="toggleLike(i)">
+          <ion-icon *ngIf="isLiked" name="heart" class="heart"></ion-icon>
+          <ion-icon *ngIf="!isLiked" name="heart-outline" class="heart"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <div class="recipe-image">
+    <img src={{recipe.image}} class="image">
+  </div>
+  <div class="recipe-stats">
+    <h6 class="ion-padding-vertical ion-text-center"><b>{{recipe.title}}</b></h6>
+    <div class="grid-container">
+      <div class="grid-item">
+        <div class="label-content">
+          {{recipe.readyInMinutes}}m
+        </div>
+        <div class="label-name">
+          <b>COOK TIME</b>
+        </div>
+      </div>
+      <div class="grid-item">
+        <div class="label-content">
+          TBD
+        </div>
+        <div class="label-name">
+          <b>SERVINGS</b>
+        </div>
+      </div>
+      <div class="grid-item">
+        <div class="label-content">
+          {{recipe.dishTypes[0]}}
+        </div>
+        <div class="label-name">
+          <b>COURSE</b>
+        </div>
+      </div>
+      <div class="grid-item">
+        <div class="label-content">
+          TBD
+        </div>
+        <div class="label-name">
+          <b>CUISINE</b>
+        </div>
+      </div>
+    </div>
+    <div class="ion-margin-end"></div>
+  </div>
+  <div class="recipe-info">
+    <ion-segment [(ngModel)]="segment" mode="md">
+      <ion-segment-button value="ingredients" checked>
+        <ion-label>INGREDIENTS</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="instructions">
+        <ion-label>INSTRUCTIONS</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="switch-content">
+      <div [ngSwitch]="segment">
+        <div *ngSwitchCase="'ingredients'">
+          <ion-list lines="none" class="ion-padding-vertical">
+            <ion-item *ngFor="let item of recipe.extendedIngredients">
+              <div class="bullet-pt">
+                <ion-icon name="ellipse-sharp"></ion-icon>
+              </div>
+              <p class="ingredient">{{item.originalString}}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+  
+        <div *ngSwitchCase="'instructions'">
+          <ion-list lines="none" class="ion-padding-vertical">
+            <ion-item *ngFor="let i of recipe.analyzedInstructions[0].steps">
+              <h6 class="recipe-step-number"><b>{{i.number}}</b></h6>
+              <p class="recipe-step-content">{{i.step}}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </div>
+  </div>
  
 </ion-content>

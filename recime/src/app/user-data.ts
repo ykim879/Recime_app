@@ -10,6 +10,7 @@ export class UserData {
     kitchenTools: string[] = [];
     pantryIngredients: Object[] = [];
     currRecipe: any;
+    likedRecipes: string[] = [];
 
     constructor(public storage: Storage) { }
 
@@ -54,4 +55,18 @@ export class UserData {
     updateCurrRecipe(recipe: Object): void{
         this.currRecipe = recipe;
     }
+
+    addLiked(recipeId: string): void {
+        this.likedRecipes.push(recipeId);
+        this.storage.set("likedRecipes", this.likedRecipes);
+    }
+
+    removeLiked(recipeId: string): void {
+        const index = this.likedRecipes.indexOf(recipeId);
+        if (index > -1) {
+            this.likedRecipes.splice(index, 1);
+        }
+        this.storage.set("likedRecipes", this.likedRecipes);
+    }
+    
 }

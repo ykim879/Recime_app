@@ -53,11 +53,10 @@ const routes: Routes = [
                 path: '',
                 loadChildren: () => import('../recipe-search/recipe-search.module').then( m => m.RecipeSearchPageModule)
               },
-              // {
-              //   path: ':recipe',
-              //   loadChildren: () => import('../recipe-detail/recipe-detail.module').then(m => m.SessionDetailModule)
-              //   // route to correct name of the recipe detail file (BEN)
-              // },
+              {
+                path: 'recipe/:recipeId',
+                loadChildren: () => import('../recipe/recipe.module').then(m => m.RecipePageModule)
+              },
               {
                 path: 'filters',
                 loadChildren: () => import('../filters/filters.module').then( m => m.FiltersPageModule)
