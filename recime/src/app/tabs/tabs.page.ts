@@ -15,9 +15,9 @@ export class TabsPage implements OnInit {
   searchIconFilled = 'search';
   pantryIcon = 'file-tray-stacked-outline';
   pantryIconFilled = 'file-tray-stacked';
-  profileTab = '';
-  searchTab = '';
-  pantryTab = '';
+  profileTab = 'person-outline';
+  searchTab = 'search-outline';
+  pantryTab = 'file-tray-stacked-outline';
 
   constructor() { }
 
