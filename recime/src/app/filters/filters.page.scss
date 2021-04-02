@@ -1,6 +1,10 @@
-.new-background-color{
-  --background: #F8CB71;
+// .new-background-color{
+//   --background: #F8CB71;
+// }
+ion-toolbar {
+    --border-style: none;
 }
+
 .body {
     --ion-background-color:#FAF7F2 !important;
 }
@@ -23,7 +27,15 @@ ion-title{
 ion-button {
     --background: #F8CB71 !important;
     --background-activated: #E16033 !important;
+    --color: #202020;
+
+    font-family: Poppins;
+    font-weight: 600;
+
+    width: 99%;
+    display: block;
 }
+
 ion-back-button {
     color: #F8CB71 !important;
     --color-focused: #E16033 !important;
@@ -64,3 +76,5 @@ ion-content {
   -ms-flex-align: center;
   align-items: center;
 }
+
+

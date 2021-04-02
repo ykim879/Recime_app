@@ -1,0 +1,16 @@
+ion-tab-bar {
+    font-family: Poppins;
+    --background: #F8CB71;
+    --color: #202020;
+}
+
+ion-tab-button[aria-selected=true] {
+    color: #202020;
+    ion-label {
+        font-weight: 600;
+    }
+}
+
+ion-tabs {
+    border-style: none;
+}

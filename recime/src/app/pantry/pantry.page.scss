@@ -1,22 +1,33 @@
 ion-content{
     --ion-background-color:#FAF7F2;
+    font-family: Poppins;
 }
 
 .pantry-title {
+  font-family: Poppins;
   font-size: xx-large;
-  font-weight: bold;
+  font-weight: 600;
   float: left;
 }
 
 .pantry-header {
+  font-family: Poppins;
     float: left;
     font-size: medium;
+    font-weight: 600;
     color: #4d4d4d;
 }
 
 .ingredient-name {
+  font-family: Poppins;
+  font-size: 16px;
     padding: 20px;
-    font-weight: bold;
+    font-weight: 600;
+}
+
+ion-label {
+  font-family: Poppins !important;
+  font-size: 16px;
 }
 
 .add-pantry {
@@ -39,9 +50,9 @@ ion-content{
 .searchbar{
   padding-left: 5px;
   padding-right: 5px;
-  position: relative;
 }
 .text-block{
+  font-family: Poppins;
   position: relative;
   top: -40px;
   left: 40px;
@@ -56,4 +67,13 @@ ion-content{
   padding-left: 90px;
   padding-top: 15px;
   padding-right: 20px;
+  float: right;
+  ion-icon {
+    color: #E16033;
+  }
+  p {
+    font-family: Poppins;
+    font-size: 16px;
+    color: #E16033;
+  }
 }

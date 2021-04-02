@@ -1,4 +1,10 @@
+ion-toolbar {
+  --background:#FAF7F2;
+  --border-style: none;
+}
+
 .body {
+  font-family: Poppins;
   --ion-background-color:#FAF7F2;
 }
 
@@ -8,8 +14,9 @@
 }
 
 .ingredients-title {
+  font-family: Poppins;
   font-size: xx-large;
-  font-weight: bold;
+  font-weight: 600;
   float: left;
 }
 
@@ -31,14 +38,11 @@
   margin-left: 23px;
 }
 
-.add-ingredient-back {
-  --background: #F8CB71;
-}
-
 .ingredient-name {
+  font-family: Poppins;
   padding: 20px;
-  font-weight: bold;
-  font-size: x-large;
+  font-weight: 600;
+  font-size: 16px;
   vertical-align: middle;
 }
 
@@ -49,4 +53,13 @@ ion-back-button {
 .card-image{
   float: left;
   padding-right: 10px;
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+  object-fit: cover;
+
+}
+
+ion-card {
+  --background: white;
 }

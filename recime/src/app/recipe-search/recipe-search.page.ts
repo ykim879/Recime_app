@@ -21,7 +21,7 @@ export class RecipeSearchPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.recipeList = data.recipes.recipes;
+    this.recipeList = data.recipes;
 
     /*
     var cookingSkills = this.storage.get("skill").then((val) => {console.log('skill', val)});

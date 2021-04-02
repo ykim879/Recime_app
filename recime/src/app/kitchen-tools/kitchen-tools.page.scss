@@ -1,27 +1,60 @@
-.new-background-color{
-    --background: #F8CB71;
+ion-toolbar {
+    --border-style: none;
+    --background: #FAF7F2;
 }
-ion-title{
+
+ion-title {
+    font-family: Poppins;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
 }
+
 ion-button {
     --background: #F8CB71 !important;
     --background-activated: #E16033 !important;
+    --color: #202020;
+
+    font-family: Poppins;
+    font-weight: 600;
+
+    width: 99%;
+    display: block;
 }
-.custom_back {
-    --color: #F8CB71 !important;
-    --color-focused: #E16033 !important;
-}
+
 ion-content {
-    --padding-bottom: 10px;
-    --padding-end: 10px;
-    --padding-start: 20px;
-    --padding-top: 20px;
-  }
+    font-family: Poppins;
+    --background:#FAF7F2;
+}
+
 ion-checkbox {
     --background-checked: #F8CB71;
     --border-color-checked: #F8CB71;
+}
+
+ion-label {
+    font-family: Poppins !important;
+    font-size: 16px;
+}
+
+.list {
+    position: relative;
+    left: 20px;
+    width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.08);
+      
+}
+
+img {
+    width: 30%;
+    height: auto;
+    top: 20px;
+
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

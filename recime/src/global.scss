@@ -27,14 +27,15 @@
 
 
 .buttonCss {
+  font-family: Poppins;
 
     button.alert-button.yes-button{
-        border-color: #F8CB71;
-      color: red;
+      border-color: #F8CB71;
+      color: #202020;
     }
 
     button.alert-button.no-button{
-      color: black;
+      color: #202020;
       background: #F8CB71;
     }
 }

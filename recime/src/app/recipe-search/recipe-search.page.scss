@@ -1,12 +1,14 @@
 .body {
+  font-family: Poppins;
   --background: #FAF7F2;
 }
 
 .recipe-title {
+  font-family: Poppins;
   margin-left: 45px;
   margin-top: 40px;
   font-size: xx-large;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .sort-button {
@@ -29,7 +31,10 @@
   position: absolute;
   top: 146px;
   left: 22px;
-  width: 331px;
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.08);
+
 }
 
 .recipe-label {
@@ -58,4 +63,9 @@
 .liked {
   --background: none;
   --background-activated: none;
+}
+
+ion-label {
+  font-family: Poppins !important;
+  font-size: 16px;
 }
