@@ -13,11 +13,16 @@ export class FiltersPage {
   timeMin: any;
   timeMax: any;
   clicked: boolean;
-  courses: Set<string> = new Set(); //initialize with filter's component's elements
-  cuisines: Set<string> = new Set(); //initialize with filter's component's
+  course: any;
+  cuisine: any;
   ingredients: Set<string> = new Set(); //initialize with filter's component's elements
   userIngredients: Set<string> = new Set();//initialize this from the storage
   defaultHref = "tabs/recipe-search"
+
+  courses: any[] = ["Any", "Appetizer", "Breakfast", "Dessert", "Drink", "Main Course", "Side Dish", "Snack"];
+  cuisines: any[] = ["Any", "African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern", "European",
+    "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin", "Mediterranean",
+    "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"];
 
   constructor(private storage: Storage,
               public alertController: AlertController,
@@ -45,16 +50,8 @@ export class FiltersPage {
       }
     });
     this.storage.get("filteredIngredients").then((val) => this.ingredients = val)
-    this.storage.get("filteredCourse").then((val) => {
-      for (let i = 0; i < val.length; i++) {
-        this.courses.add(val[i].name);
-      }
-    });
-    this.storage.get("filteredCuisine").then((val) => {
-      for (let i = 0; i < val.length; i++) {
-        this.cuisines.add(val[i].name);
-      }
-    });
+    this.course = await this.storage.get("filteredCourse");
+    this.cuisine = await this.storage.get("filteredCuisine");
   }
   setBadge(time) {
     this.timeMin = time.lower;
@@ -62,19 +59,12 @@ export class FiltersPage {
     this.clicked = false;
   }
   selectCourse(course) {
-    this.courses.add(course);
+    this.course = course;
     this.clicked = false;
   }
-  deleteCourse(course) {
-    this.courses.delete(course);
-    this.clicked = false;
-  }
+  
   selectCuisine(cuisine) {
-    this.cuisines.add(cuisine);
-    this.clicked = false;
-  }
-  deleteCuisine(course) {
-    this.cuisines.delete(course);
+    this.cuisine = cuisine;
     this.clicked = false;
   }
   saveSkills() {
@@ -82,8 +72,8 @@ export class FiltersPage {
     this.storage.set("filteredMinTime", this.timeMin)
     this.storage.set("filteredMaxTime", this.timeMax)
     this.storage.set("filteredIngredients", this.ingredients)
-    this.storage.set("filteredCourse", this.courses)
-    this.storage.set("filteredCuisine", this.cuisines)
+    this.storage.set("filteredCourse", this.course)
+    this.storage.set("filteredCuisine", this.cuisine)
     this.clicked = true;
     this.presentToast()
   }

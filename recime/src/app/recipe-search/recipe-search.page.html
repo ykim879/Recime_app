@@ -15,10 +15,9 @@
   <div class="recipe-list">
     <ion-list *ngFor="let recipe of recipeList; let i = index">
       <ion-item class="recipe-item" routerLink="./recipe/{{recipe.id}}" (click)="updateCurrRecipe(i)">
-        <!-- <ion-button class="liked" (click)="toggleLike(i)"> -->
           <ion-icon *ngIf="!likedRecipes[i]" name="heart-outline" class="heart"></ion-icon>
           <ion-icon *ngIf="likedRecipes[i]" name="heart" class="heart"></ion-icon>
-        <!-- </ion-button> -->
+          
           <ion-thumbnail class="recipe-image">
             <img src={{recipe.image}}>
           </ion-thumbnail>

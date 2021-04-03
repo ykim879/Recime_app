@@ -5,7 +5,7 @@
       <ion-back-button  [defaultHref]="defaultHref"></ion-back-button>
       </ion-buttons>
       <ion-buttons slot="end" class = "custom-back">
-        <ion-button class="liked" (click)="toggleLike(i)">
+        <ion-button class="liked" (click)="toggleLike()">
           <ion-icon *ngIf="isLiked" name="heart" class="heart"></ion-icon>
           <ion-icon *ngIf="!isLiked" name="heart-outline" class="heart"></ion-icon>
         </ion-button>
@@ -28,7 +28,7 @@
       </div>
       <div class="grid-item">
         <div class="label-content">
-          TBD
+          {{recipe.servings}}
         </div>
         <div class="label-name">
           <b>SERVINGS</b>
@@ -43,8 +43,8 @@
         </div>
       </div>
       <div class="grid-item">
-        <div class="label-content">
-          TBD
+        <div class="small-label-content">
+          {{recipe.cuisines[0]}}
         </div>
         <div class="label-name">
           <b>CUISINE</b>

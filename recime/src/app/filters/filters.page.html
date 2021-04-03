@@ -27,22 +27,20 @@
     </div>
     <div>
       <p class = "title">INGREDIENTS<br /> </p>
-      <ion-select multiple [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" [(ngModel)] = "ingredients"> <!--visual-->
+      <ion-select multiple [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select Ingredients" [(ngModel)] = "ingredients"> <!--visual-->
         <ion-select-option *ngFor="let ingredient of userIngredients">{{ingredient | titlecase}}</ion-select-option>
       </ion-select>
     </div>
     <div>
       <p class = "title">COURSE<br /> </p>
-      <ion-select [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" interface="popover" [(ngModel)] = "course"  (ionChange)="selectCourse(course)" > <!--visual-->
-        <ion-select-option value="course1">course1</ion-select-option>
-        <ion-select-option value="course2">course2</ion-select-option>
+      <ion-select [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" [(ngModel)] ="course"  (ionChange)="selectCourse(course)" > <!--visual-->
+        <ion-select-option *ngFor="let course of courses">{{course}}</ion-select-option>
       </ion-select>
     </div>
     <div>
       <p class = "title">CUISINE TYPE<br /> </p>
-      <ion-select [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" interface="popover" [(ngModel)] = "cuisine"  (ionChange)="selectCuisine(cuisine)" > <!--visual-->
-        <ion-select-option value="course1">course1</ion-select-option>
-        <ion-select-option value="course2">course2</ion-select-option>
+      <ion-select [interfaceOptions]="{'cssClass': 'wider-popover'}" placeholder="Select One" [(ngModel)] = "cuisine"  (ionChange)="selectCuisine(cuisine)" > <!--visual-->
+        <ion-select-option *ngFor="let cuisine of cuisines">{{cuisine}}</ion-select-option>
       </ion-select>
     </div>
   </ion-list>

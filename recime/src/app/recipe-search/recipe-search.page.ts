@@ -22,20 +22,24 @@ export class RecipeSearchPage implements OnInit {
 
   ngOnInit() {
     this.recipeList = data.recipes;
+  }
 
-    /*
-    var cookingSkills = this.storage.get("skill").then((val) => {console.log('skill', val)});
-    var ingredients = this.storage.get("ingredients").then((val) => {console.log('ingr', val)});
-    var diets = this.storage.get("diets").then((val) => {console.log('diets', val)});
-    var tools = this.storage.get("tools").then((val) => {console.log('tools', val)});
-    var filters = {
-      minTime: this.storage.get("filteredMinTime").then((val) => {console.log('minTime', val)}),
-      maxTime: this.storage.get("filteredMaxTime").then((val) => {console.log('maxTime', val)}),
-      filteredIngredients: this.storage.get("filteredIngredients").then((val) => {console.log('filteredIngredients', val)}),
-      course: this.storage.get("filteredCourse").then((val) => {console.log('course', val)}),
-      cuisine: this.storage.get("filteredCuisine").then((val) => {console.log('cuisine', val)})
-    };
-    
+  async ionViewWillEnter() {
+    //collect user data for post
+    let skills = await this.storage.get("skill");
+    let ingrTemp = await this.storage.get("ingredients");
+    let ingredients = [];
+    for (let i = 0; i < ingrTemp.length; i++) {
+      ingredients[i] = ingrTemp[i].name;
+    }
+    let diets = await this.storage.get("diets");
+    let tools = await this.storage.get("tools");
+    let filteredMinTime = await this.storage.get("filteredMinTime");
+    let filteredMaxTime = await this.storage.get("filteredMaxTime");
+    let filteredIngredients = await this.storage.get("filteredIngredients");
+    let filteredCourse = await this.storage.get("filteredCourse");
+    let filteredCuisine = await this.storage.get("filteredCuisine");
+
     //npm install jquery to use i think
     $(document).ready(function() {
       // alert("i'm here ;v;")
@@ -44,32 +48,32 @@ export class RecipeSearchPage implements OnInit {
       //   .then(response => response.json())
       //   .then(json => console.log(json))
       $.post("http://localhost:8000/api/recommend",
-        { params: {cookingSkills, ingredients, diets, tools, filters} });
-
-
+        { skills: skills,
+          ingredients: ingredients,
+          diets: diets,
+          tools: tools,
+          minTime: filteredMinTime,
+          maxTime: filteredMaxTime,
+          filteredIngredients: filteredIngredients,
+          course: filteredCourse,
+          cuisine: filteredCuisine
+      });
     });
-    */
-  }
 
-  ionViewWillEnter() {
-    this.storage.get("likedRecipes").then((val) => {
-      for (let i = 0; i < this.recipeList.length; i++) {
-        if (val.indexOf(this.recipeList[i].id) > -1) {
-          this.likedRecipes[i] = true;
-        } else {
-          this.likedRecipes[i] = false;
-        }
+    //get liked recipes
+    let test = await this.storage.get("likedRecipes");
+    console.log("test", test);
+    for (let i = 0; i < this.recipeList.length; i++) {
+      if (test.indexOf(this.recipeList[i].id) > -1) {
+        this.likedRecipes[i] = true;
+      } else {
+        this.likedRecipes[i] = false;
       }
-      
-    });
+    }
   }
 
   ionViewWillLeave() {
     this.storage.set("currRecipe", this.recipeList[this.ind]);
-  }
-
-  toggleLike(index) {
-    this.recipeList[index].liked = !this.recipeList[index].liked;
   }
 
   updateCurrRecipe(index) {

@@ -29,10 +29,27 @@ export class RecipePage implements OnInit {
 
   ionViewWillEnter() {
     this.storage.get("likedRecipes").then((val) => {
-      if (val.indexOf(this.recipe.id) > -1) {
+      const index = val.indexOf(this.recipe.id);
+
+      if (index > -1) {
         this.isLiked = true;
       }
     });
+  }
+
+  async ionViewWillLeave() {
+    let likedRecipes = await this.storage.get("likedRecipes");
+    const index = likedRecipes.indexOf(this.recipe.id);
+    if (this.isLiked) {
+      if (index <= -1) {
+        likedRecipes.push(this.recipe.id);
+      }
+    } else {
+      if (index > -1) {
+        likedRecipes.splice(index, 1);
+      }
+    }
+    this.storage.set("likedRecipes", likedRecipes);
   }
 
   ngOnInit() {
@@ -40,15 +57,7 @@ export class RecipePage implements OnInit {
   }
 
   toggleLike() {
-    this.storage.get("likedRecipes").then((val) => {
-      if (val.indexOf(this.recipe.id) > -1) {
-        this.user.removeLiked(this.recipe.id);
-        this.isLiked = false;
-      } else {
-        this.user.addLiked(this.recipe.id);
-        this.isLiked = true;
-      }
-    });
+    this.isLiked = !this.isLiked;
   }
 
 }
