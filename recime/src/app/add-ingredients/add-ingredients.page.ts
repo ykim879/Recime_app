@@ -29,12 +29,21 @@ export class AddIngredientsPage implements OnInit {
   constructor(private storage: Storage,
               private user: UserData,
               private http:HttpClient,
-              public toastController:ToastController) { }
+              public toastController:ToastController) { 
+                console.log("constructor 1");
+                // this.storage.get("ingredients").then((val) => {
+                //   console.log("val", val);
+                //   this.selectedIngredients = val;
+                // });
+                console.log("constructor 2");
+              }
 
   ngOnInit() {
-    this.storage.get("ingredients").then((val) => {
-      for (let i = 0; i < val.length; i++) {
-        this.selectedIngredients.push(val[i]);
+    console.log("ngOnInit");
+    this.storage.get("ingredients").then((val) => { 
+      // for (let i = 0; i < val.length; i++) {
+      for (let i of val) {
+        this.selectedIngredients.push(i);
       }
     });
   }
@@ -56,16 +65,21 @@ export class AddIngredientsPage implements OnInit {
     let name = ingredient.name;
     let exists = false;
     this.storage.get("ingredients").then((val) => {
-      for (let i = 0; i < val.length; i++) {
-        if (name === val[i].name) {
-          exists = true;
-          break;
+      if (val != null) {
+        for (let i = 0; i < val.length; i++) {
+          if (name === val[i].name) {
+            exists = true;
+            break;
+          }
+        }
+
+        if (!exists) {
+          this.selectedIngredients.push(ingredient);
+          this.user.addPantryIngredient(ingredient);
         }
       }
-      if (!exists) {
-        this.selectedIngredients.push(ingredient);
-        this.user.addPantryIngredient(ingredient);
-      }
+      
+      
     });
     this.presentToast(ingredient)
   }

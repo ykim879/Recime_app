@@ -29,26 +29,36 @@ export class RecipePage implements OnInit {
 
   ionViewWillEnter() {
     this.storage.get("likedRecipes").then((val) => {
-      const index = val.indexOf(this.recipe.id);
-
-      if (index > -1) {
-        this.isLiked = true;
+      if (val != null) {
+        const index = val.indexOf(this.recipe.id);
+        if (index > -1) {
+          this.isLiked = true;
+        }
       }
+      
     });
   }
 
   async ionViewWillLeave() {
     let likedRecipes = await this.storage.get("likedRecipes");
-    const index = likedRecipes.indexOf(this.recipe.id);
-    if (this.isLiked) {
-      if (index <= -1) {
-        likedRecipes.push(this.recipe.id);
+    if (likedRecipes != null) {
+      const index = likedRecipes.indexOf(this.recipe.id);
+      if (this.isLiked) {
+        if (index <= -1) {
+          likedRecipes.push(this.recipe.id);
+        }
+      } else {
+        if (index > -1) {
+          likedRecipes.splice(index, 1);
+        }
       }
     } else {
-      if (index > -1) {
-        likedRecipes.splice(index, 1);
+      if (this.isLiked) {
+        likedRecipes = [];
+        likedRecipes.push(this.recipe.id);
       }
     }
+    
     this.storage.set("likedRecipes", likedRecipes);
   }
 

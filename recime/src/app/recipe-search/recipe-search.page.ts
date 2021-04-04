@@ -29,8 +29,9 @@ export class RecipeSearchPage implements OnInit {
     let skills = await this.storage.get("skill");
     let ingrTemp = await this.storage.get("ingredients");
     let ingredients = [];
-    for (let i = 0; i < ingrTemp.length; i++) {
-      ingredients[i] = ingrTemp[i].name;
+    // for (let i = 0; i < ingrTemp.length; i++) {
+    for (let i of ingrTemp) {
+      ingredients.push(i.name);
     }
     let diets = await this.storage.get("diets");
     let tools = await this.storage.get("tools");
@@ -64,7 +65,8 @@ export class RecipeSearchPage implements OnInit {
     let test = await this.storage.get("likedRecipes");
     console.log("test", test);
     for (let i = 0; i < this.recipeList.length; i++) {
-      if (test.indexOf(this.recipeList[i].id) > -1) {
+    // for (let i of test) {
+      if (test != null && test.indexOf(this.recipeList[i].id) > -1) {
         this.likedRecipes[i] = true;
       } else {
         this.likedRecipes[i] = false;
