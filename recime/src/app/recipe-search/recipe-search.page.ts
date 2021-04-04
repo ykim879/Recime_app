@@ -49,7 +49,8 @@ export class RecipeSearchPage implements OnInit {
       //   .then(response => response.json())
       //   .then(json => console.log(json))
       $.post("http://localhost:8000/api/recommend",
-        { skills: skills,
+        JSON.stringify({
+          skills: skills,
           ingredients: ingredients,
           diets: diets,
           tools: tools,
@@ -58,6 +59,11 @@ export class RecipeSearchPage implements OnInit {
           filteredIngredients: filteredIngredients,
           course: filteredCourse,
           cuisine: filteredCuisine
+      })).then(function(postRet) {
+        $.get("http://localhost:8000/api/recommend/" + postRet).then(function(getRet) {
+          console.log(getRet);
+          this.recipeList = getRet;
+        });
       });
     });
 
