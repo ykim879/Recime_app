@@ -44,3 +44,53 @@
 .wider-popover .popover-content {
   --width: 95%;
 }
+.recipe-title {
+  font-family: Poppins;
+  margin-left: 45px;
+  margin-top: 40px;
+  font-size: xx-large;
+  font-weight: 600;
+}
+.recipe-header {
+  float: left;
+  font-size: medium;
+  color: #4d4d4d;
+}
+
+.recipe-search {
+  margin-left: 45px;
+  margin-right: 25px;
+}
+
+.recipe-list {
+  position: absolute;
+  top: 146px;
+  left: 22px;
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.08);
+
+}
+
+.recipe-label {
+  margin-left: 20px;
+}
+
+.recipe-image {
+  width: 90px;
+  height: 90px;
+  margin-left: 5px;
+}
+
+.recipe-item {
+  margin: 10px auto;
+  --background: white;
+  --border-style: none;
+  --border-radius: 5px;
+  --padding-start: 5px;
+}
+
+.heart {
+  color: #E16033;
+  font-size: 20px;
+}

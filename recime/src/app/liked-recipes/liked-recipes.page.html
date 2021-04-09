@@ -45,9 +45,31 @@
 </ion-header>
 
 <ion-content fullscreen class = "body">
-  <ion-list>
-    <!-- put the recipe blocks here(use ion-card) -->
+  <ion-searchbar (ionChange) = "refresh()"
+                 class="liked-recipes-search"
+                 placeholder="Search Recipes"
+                 [(ngModel)] = "searchTerm">
+  </ion-searchbar>
+  <div class="recipe-list">
+    <ion-list>
+      <ion-item-sliding *ngFor="let recipe of display; let i = index">
+    <ion-item class="recipe-item" routerLink="./recipe/{{recipe.id}}" (click)="updateCurrRecipe(i)">
+      <ion-icon name="heart" class="heart"></ion-icon>
+      <ion-thumbnail class="recipe-image">
+        <img src={{recipe.image}}>
+      </ion-thumbnail>
+      <ion-label class="recipe-label">
+        <h3>{{recipe.title}}</h3>
+        <p>
+          TBD / {{recipe.extendedIngredients.length}} ingredients
+        </p>
+        <p>
+          <ion-icon name="time-outline"></ion-icon>
+          {{recipe.readyInMinutes}} min
+        </p>
+      </ion-label>
+  </ion-item>
+</ion-item-sliding>
   </ion-list>
+</div>
 </ion-content>
-
-
