@@ -41,7 +41,16 @@ const routes: Routes = [
               },
               {
                 path: 'liked-recipes',
-                loadChildren: () => import('../liked-recipes/liked-recipes.module').then( m => m.LikedRecipesPageModule)
+                children: [
+                  {
+                    path: '',
+                    loadChildren: () => import('../liked-recipes/liked-recipes.module').then( m => m.LikedRecipesPageModule)
+                  }, 
+                  {
+                    path: 'recipe/:recipeId',
+                    loadChildren: () => import('../recipe/recipe.module').then(m => m.RecipePageModule)
+                  }
+                ]
               },
             ]
         },

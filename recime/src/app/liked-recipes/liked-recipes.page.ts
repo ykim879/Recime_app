@@ -32,6 +32,8 @@ export class LikedRecipesPage implements OnInit {
   async ionViewWillEnter() {
     //get liked recipes
     let test = await this.storage.get("likedRecipes");
+    this.likedRecipes = [];
+    this.likedRecipeList = [];
     console.log("test", test);
     for (let i = 0; i < this.recipeList.length; i++) {
       if (test != null && test.indexOf(this.recipeList[i].id) > -1) {
@@ -49,11 +51,19 @@ export class LikedRecipesPage implements OnInit {
 
   updateCurrRecipe(i) {
     console.log("update:", this.display[i].title);
-    //this.user.updateCurrRecipe(this.recipeList[index]);
-    //this.ind = index;
+    console.log("id:", this.display[i].id);
+    this.user.updateCurrRecipe(this.display[i]);
+    let index = 0;
+    for (let id = 0; id < this.recipeList.length; id++) {
+      if (this.display[i].id == this.recipeList[id].id) {
+        index = id;
+        break;
+      } 
+    }
+    console.log("id:", this.recipeList[index].id);
+    this.ind = index;
   }
   refresh() {
-    console.log("refresh");
     this.display = this.likedRecipeList.filter(item => item.title.toLowerCase().indexOf(this.searchTerm) > -1);
     /*
     requestAnimationFrame(() => {
