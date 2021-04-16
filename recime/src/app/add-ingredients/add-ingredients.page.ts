@@ -73,7 +73,7 @@ export class AddIngredientsPage implements OnInit {
           }
         }
 
-        if (!exists) {
+        if (!exists && !(this.user.pantryIngredients.some(ingred => ingredient === ingred))) {
           this.selectedIngredients.push(ingredient);
           this.user.addPantryIngredient(ingredient);
         }
@@ -82,6 +82,7 @@ export class AddIngredientsPage implements OnInit {
       
     });
     this.presentToast(ingredient)
+    //console.log(this.user.pantryIngredients.some(ingred => ingredient === ingred));
   }
 
   searchIngredients(entry: string): Observable<any> {

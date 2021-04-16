@@ -1,4 +1,4 @@
-<ion-content class="body">
+<ion-content fullscreen="true" class="body">
   <ion-header>
     <ion-toolbar class="add-ingredient-back">
       <ion-buttons slot="start" class = "custom-back">
@@ -10,11 +10,11 @@
     <h3 class="ingredients-title">Add Ingredients</h3>
   </div>
   <h4 class="ingredients-subtitle">Search and add ingredients to your pantry.</h4>
-  <ion-searchbar (ionChange) = "refresh()"
+    <ion-searchbar (ionChange) = "refresh()"
                  class="ingredients-search"
                  placeholder="Search Ingredients"
                  [(ngModel)] = "searchTerm">
-  </ion-searchbar>
+    </ion-searchbar>
   <ion-list>
     <ion-card button
               detail="false"
