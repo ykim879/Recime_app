@@ -15,13 +15,14 @@ export class RecipeSearchPage implements OnInit {
   recipeList: any;
   ind: any;
   likedRecipes: boolean[] = [];
+  recipesLoaded: Promise<boolean>;
 
   constructor(
     private user: UserData, public storage: Storage
   ) { }
 
   ngOnInit() {
-    this.recipeList = data.recipes;
+    this.recipeList = [];
   }
 
   async ionViewWillEnter() {
@@ -41,35 +42,25 @@ export class RecipeSearchPage implements OnInit {
     let filteredCourse = await this.storage.get("filteredCourse");
     let filteredCuisine = await this.storage.get("filteredCuisine");
 
-    //npm install jquery to use i think
-    $(document).ready(function() {
-      // alert("i'm here ;v;")
-      //testing the jquery
-      // fetch('https://jsonplaceholder.typicode.com/todos/1')
-      //   .then(response => response.json())
-      //   .then(json => console.log(json))
-      $.post("http://localhost:8000/api/recommend",
-        JSON.stringify({
-          skills: skills,
-          ingredients: ingredients,
-          diets: diets,
-          tools: tools,
-          minTime: filteredMinTime,
-          maxTime: filteredMaxTime,
-          filteredIngredients: filteredIngredients,
-          course: filteredCourse,
-          cuisine: filteredCuisine
-      })).then(function(postRet) {
-        $.get("http://localhost:8000/api/recommend/" + postRet).then(function(getRet) {
-          console.log(getRet);
-          this.recipeList = getRet;
-        });
-      });
-    });
+    let post = await Promise.resolve($.post("http://localhost:8000/api/recommend",
+      JSON.stringify({
+        skills: skills,
+        ingredients: ingredients,
+        diets: diets,
+        tools: tools,
+        minTime: filteredMinTime,
+        maxTime: filteredMaxTime,
+        filteredIngredients: filteredIngredients,
+        course: filteredCourse,
+        cuisine: filteredCuisine
+    })));
+
+    let recipeData = await Promise.resolve($.get("http://localhost:8000/api/recommend/" + post));
+    this.recipeList = recipeData.recipes;
 
     //get liked recipes
     let test = await this.storage.get("likedRecipes");
-    console.log("test", test);
+    // console.log("test", test);
     for (let i = 0; i < this.recipeList.length; i++) {
     // for (let i of test) {
       if (test != null && test.indexOf(this.recipeList[i].id) > -1) {

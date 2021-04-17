@@ -13,26 +13,26 @@
     </ion-button>
   </div>
   <div class="recipe-list">
-    <ion-list *ngFor="let recipe of recipeList; let i = index">
-      <ion-item class="recipe-item" routerLink="./recipe/{{recipe.id}}" (click)="updateCurrRecipe(i)">
-          <ion-icon *ngIf="!likedRecipes[i]" name="heart-outline" class="heart"></ion-icon>
-          <ion-icon *ngIf="likedRecipes[i]" name="heart" class="heart"></ion-icon>
-          
-          <ion-thumbnail class="recipe-image">
-            <img src={{recipe.image}}>
-          </ion-thumbnail>
-          <ion-label class="recipe-label">
-            <h3>{{recipe.title}}</h3>
-            <p>
-              TBD / {{recipe.extendedIngredients.length}} ingredients
-            </p>
-            <p>
-              <ion-icon name="time-outline"></ion-icon>
-              {{recipe.readyInMinutes}} min
-            </p>
-          </ion-label>
-      </ion-item>
-    </ion-list>
+      <ion-list *ngFor="let recipe of recipeList; let i = index">
+        <ion-item class="recipe-item" routerLink="./recipe/{{recipe.id}}" (click)="updateCurrRecipe(i)">
+            <ion-icon *ngIf="!likedRecipes[i]" name="heart-outline" class="heart"></ion-icon>
+            <ion-icon *ngIf="likedRecipes[i]" name="heart" class="heart"></ion-icon>
+            
+            <ion-thumbnail class="recipe-image">
+              <img src={{recipe.image}}>
+            </ion-thumbnail>
+            <ion-label class="recipe-label">
+              <h3>{{recipe.title}}</h3>
+              <p>
+                TBD / {{recipe.extendedIngredients.length}} ingredients
+              </p>
+              <p>
+                <ion-icon name="time-outline"></ion-icon>
+                {{recipe.readyInMinutes}} min
+              </p>
+            </ion-label>
+        </ion-item>
+      </ion-list>
   </div>
 </ion-content>
 
