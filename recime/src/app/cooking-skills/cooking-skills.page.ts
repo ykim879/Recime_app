@@ -1,10 +1,11 @@
-import { Component, ComponentFactoryResolver, OnInit,ViewChild } from '@angular/core';
+import {Component, ComponentFactoryResolver, Injectable, OnInit, ViewChild} from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
 import {AlertController, ToastController} from '@ionic/angular';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import {ActivatedRouteSnapshot, CanDeactivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {NavController, NavParams} from '@ionic/angular';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-cooking-skills',
@@ -79,21 +80,10 @@ export class CookingSkillsPage implements OnInit {
     this.clicked = true;
     this.presentToast();
   }
-  canDeactivate() : boolean {
-    console.log("test!");
-    if (!this.clicked) {
-      return false;
-    }
-    return true;
+  canDeactivate() {
+    return !this.clicked;
   }
   //https://www.debugcn.com/en/article/74127847.html
-  ionViewWillLeave() {
-    console.log("leaving");
-    if (!this.clicked) {
-      //this.location.back();
-      this.showAlert();
-    }
-  }
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Changes have been saved.',
@@ -113,41 +103,41 @@ export class CookingSkillsPage implements OnInit {
   */
 //alert info : https://www.freakyjolly.com/ionic-alert-this-alertcontroller-create/#.YD69NmhKhPY
 //https://ionicframework.com/docs/v3/api/navigation/NavController/#nav-guards
-  showAlert() {
-    if(!this.clicked) {
-      this.alertController.create({
-        header: 'Your changes have not been saved',
-        message: 'Do you wanna save your changes?',
-        cssClass: 'buttonCss',
-        buttons: [{
-          cssClass: 'yes-button',
-          text: 'Yes, save changes',
-          handler: () => {
-            //this.router.navigateByUrl('/tabs/profile/cooking-skills') //navigation: https://www.codegrepper.com/code-examples/javascript/navigation+to+next+component+in+button+click+angular
-            this.saveSkills();
-          }
-        },
-        {
-          cssClass: 'no-button',
-          text: 'No',
-          handler: () => {
-          }
-        }]
-      }).then(res => {
-        res.present();
+}
 
-      });
+@Injectable()
+export class DeactivateGuard implements CanDeactivate<CookingSkillsPage> {
+  constructor(public alertController: AlertController) {}
+  canDeactivate(component: CookingSkillsPage,
+                currentRoute: ActivatedRouteSnapshot,
+                currentState: RouterStateSnapshot,
+                nextState?: RouterStateSnapshot):
+    Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (component.canDeactivate()) {
+      return new Promise((resolve, reject) => {
+        this.alertController.create({
+          header: 'Your changes have not been saved',
+          message: 'Do you wanna save your changes?',
+          cssClass: 'buttonCss',
+          buttons: [{
+            cssClass: 'yes-button',
+            text: 'Yes, save changes',
+            handler: () => {
+              component.saveSkills();
+              resolve(true);
+            }
+          },
+            {
+              cssClass: 'no-button',
+              text: 'No',
+              handler: () => {
+                resolve(true);
+              }
+            }]
+        }).then(res => {
+          res.present();
+        });
+      })
     }
   }
-  ngOnDestroy(){
-    console.log("sup nerds? I should be destroyed now right?");
- }
-
-  // test user storage for skills
-  // loadData() {
-  //   this.storage.get("skill").then((val) => {
-  //     console.log('Your skill is', val);
-  //   });
-  // }
-
 }

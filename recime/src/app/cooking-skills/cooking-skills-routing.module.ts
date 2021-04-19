@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CookingSkillsPage } from './cooking-skills.page';
+import { DeactivateGuard, CookingSkillsPage } from './cooking-skills.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: CookingSkillsPage
+    component: CookingSkillsPage,
+    canDeactivate: [DeactivateGuard]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [DeactivateGuard]
 })
 export class CookingSkillsPageRoutingModule {}
