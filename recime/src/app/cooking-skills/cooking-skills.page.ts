@@ -139,5 +139,7 @@ export class DeactivateGuard implements CanDeactivate<CookingSkillsPage> {
         });
       })
     }
+    else
+      return true;
   }
 }
