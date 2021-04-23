@@ -2,7 +2,7 @@
 
 ## Installation Guide
 ### PREREQUISITES
-Download Node.js from https://nodejs.org/en. Install in order to proceed as our app uses Angular.\
+Download Node.js from https://nodejs.org/en. Install in order to proceed as our app uses Angular.
 ### DEPENDENCIES
 First, install Angular by following command:
 ```bash
