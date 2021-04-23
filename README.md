@@ -22,13 +22,13 @@ If you have Ionic already, you have to unintall and intall it again.
 You can see the details on following link: https://ionicframework.com/docs
 Additionally, download 	jQuery (https://jquery.com/download/) and verify that thE ng2-search-filter is
 installed as well (https://www.npmjs.com/package/ng2-search-filter).
-### DOWNLOAD*
+### DOWNLOAD
 >       Download Recime_app-main.zip
 ### BUILD
 >       No build necessary for this app.
-### INSTALLATION**
+### INSTALLATION
 >       No installation necessary for this app.
-### RUNNING APPLICATION**
+### RUNNING APPLICATION
 Launch a terminal window and navigate to the directory where the Recime_app-main folder is located. Enter the /recime folder and type follwoing command: 
 ```bash
 ! ionic serve
