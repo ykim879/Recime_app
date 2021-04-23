@@ -23,11 +23,11 @@ You can see the details on following link: https://ionicframework.com/docs
 Additionally, download 	jQuery (https://jquery.com/download/) and verify that thE ng2-search-filter is
 installed as well (https://www.npmjs.com/package/ng2-search-filter).
 ### DOWNLOAD*
->       Download Recime_app-main.zip\
+>       Download Recime_app-main.zip
 ### BUILD
->       No build necessary for this app.\
+>       No build necessary for this app.
 ### INSTALLATION**
->       No installation necessary for this app.\
+>       No installation necessary for this app.
 ### RUNNING APPLICATION**
 Launch a terminal window and navigate to the directory where the Recime_app-main folder is located. Enter the /recime folder and type follwoing command: 
 ```bash
