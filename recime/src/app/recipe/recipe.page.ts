@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserData } from '../user-data';
 import { Storage } from '@ionic/storage';
 import {ActivatedRoute} from "@angular/router";
+import { LikedRecipesPage } from '../liked-recipes/liked-recipes.page';
 
 @Component({
   selector: 'app-recipe',
@@ -29,10 +30,15 @@ export class RecipePage implements OnInit {
 
   ionViewWillEnter() {
     this.storage.get("likedRecipes").then((val) => {
+      let found = false;
       if (val != null) {
-        const index = val.indexOf(this.recipe.id);
-        if (index > -1) {
-          this.isLiked = true;
+        let i = 0;
+        while (i < val.length && !found) {
+          if (this.recipe.id === val[i].id) {
+            this.isLiked = true;
+            found = true;
+          }
+          i++;
         }
       }
       
@@ -41,24 +47,25 @@ export class RecipePage implements OnInit {
 
   async ionViewWillLeave() {
     let likedRecipes = await this.storage.get("likedRecipes");
+    let found = false;
     if (likedRecipes != null) {
-      const index = likedRecipes.indexOf(this.recipe.id);
-      if (this.isLiked) {
-        if (index <= -1) {
-          likedRecipes.push(this.recipe.id);
+      let i = 0;
+      while (i < likedRecipes.length && !found) {
+        if (this.recipe.id === likedRecipes[i].id) {
+          if (this.isLiked) {
+            likedRecipes.push(this.recipe);
+          } else {
+            likedRecipes.splice(i, 1);
+          }
+          found = true;
         }
-      } else {
-        if (index > -1) {
-          likedRecipes.splice(index, 1);
-        }
+        i++;
       }
-    } else {
-      if (this.isLiked) {
-        likedRecipes = [];
-        likedRecipes.push(this.recipe.id);
+      if (!found && this.isLiked) {
+        likedRecipes.push(this.recipe);
       }
     }
-    
+    console.log("likedRecipes", likedRecipes);
     this.storage.set("likedRecipes", likedRecipes);
   }
 

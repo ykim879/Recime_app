@@ -1,15 +1,32 @@
-# Recime App
-## Release Note📃
+# recime app (frontend)
+## Release Notes
 > # v.1.0.0 (04/26/2020)
->  **features**:
->   1. Users are able to edit their profile by selecting their cooking skill, dietary restriction, 
->      thier kitchen appliances.
+>  **Features**:
+>   1. Users are able to edit their profile by selecting their cooking skill level, dietary restrictions, and 
+>      kitchen appliances.
 >   2. Users are able to update their pantry status by adding ingredients and deleting ingredients.
->   3. Users are able to get recipe recommendations based on their pantry and profile status.
+>   3. Users are able to get recipe recommendations based on their pantry ingredients and profile.
 >   
->  **defects**:
+>  **Defects**:
 >   1. The algorithm for the recipe recommendation is not sophisticated enough to present the best
->       recipes to the users. Some recipes have more priority than others. So no matter of users'
->       status, some of the recipes more frequently showing up.
->   2. Liked Recipes are not presenting well. Since our product has limited API call, we cannot call new
->       API for the Liked Recipes.
+>       recipes to the users so some recipes may show up often.
+
+## Installation Guide
+> # v.1.0.0 (04/26/2020)
+>  **PREREQUISITES**: \
+>       You must have Node.js (https://nodejs.org/en/) installed in order to proceed as our app uses Angular.\
+>  **DEPENDENCIES**: \
+>       Download and install Angular (https://angular.io/guide/setup-local) as well as Ionic (https://ionicframework.com/docs
+>  angular/your-first-app). Additionally, download 	jQuery (https://jquery.com/download/) and verify that thE ng2-search-filter is
+> installed as well (https://www.npmjs.com/package/ng2-search-filter). \
+>  **DOWNLOAD**: \
+>       Download Recime_app-main.zip\
+>  **BUILD**: \
+>       No build necessary for this app.\
+>  **INSTALLATION**: \
+>       No installation necessary for this app.\
+>  **RUNNING APPLICATION**: \
+>       Launch a terminal window and navigate to the directory where the Recime_app-main folder is located. Enter the /recime folder
+>       and type: ionic serve. For the best viewing experience, after the localhost site for recime is brought up, right click and
+>       “inspect element” and set the viewing mode to iPhone 6/7/8.
+>
