@@ -1,7 +1,7 @@
 # Recime_app
 ## Release Note
-> #v.1.0.0 (04/26/2020)
-> **features**:
+> # v.1.0.0 (04/26/2020)
+>  **features**:
 >   1. Users are able to edit their profile by selecting their cooking skill, dietary restriction, 
 >      thier kitchen appliances.
 >   2. Users are able to update their pantry status by adding ingredients and deleting ingredients.
