@@ -2,25 +2,25 @@
 
 ## Installation Guide
 ### PREREQUISITES
-Download Node.js from https://nodejs.org/en. Install in order to proceed as our app uses Angular.
+Download Node.js from https://nodejs.org/en as our app uses Angular.
 ### DEPENDENCIES
-First, install Angular by following command:
+First, install Angular:
 ```bash
  npm install -g @angular/cli
 ````
-You can see the details on following link: https://angular.io/guide/setup-local
+See more details here: https://angular.io/guide/setup-local
 
-Secondly, install Ionic by following command:
+Secondly, install Ionic:
 ```bash
  npm install -g @ionic/cli
 ```
-If you have Ionic already, you have to unintall and intall it again.
+If you have Ionic already, you may have to uninstall and reinstall it.
 ```bash
  npm uninstall -g ionic
  npm install -g @ionic/cli
 ```
-You can see the details on following link: https://ionicframework.com/docs
-Additionally, download 	jQuery (https://jquery.com/download/) and verify that thE ng2-search-filter is
+See more details here: https://ionicframework.com/docs
+Additionally, download 	jQuery (https://jquery.com/download/) and verify that the ng2-search-filter is
 installed as well (https://www.npmjs.com/package/ng2-search-filter).
 ### DOWNLOAD
 Download Recime_app-main.zip
@@ -29,7 +29,7 @@ No build necessary for this app.
 ### INSTALLATION
 No installation necessary for this app.
 ### RUNNING APPLICATION
-Launch a terminal window and navigate to the directory where the Recime_app-main folder is located. Enter the /recime folder and type follwoing command: 
+Launch a terminal window and navigate to the directory where the Recime_app-main folder is located. Enter the /recime folder and type following command: 
 ```bash
  ionic serve
 ```
