@@ -1,5 +1,5 @@
-# Recime_app
-## Release Note
+# Recime App
+## Release Note📃
 > # v.1.0.0 (04/26/2020)
 >  **features**:
 >   1. Users are able to edit their profile by selecting their cooking skill, dietary restriction, 
